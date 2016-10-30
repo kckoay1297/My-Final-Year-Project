@@ -388,7 +388,7 @@ button.myBtn2{
 	if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 	}
-	$sql = "SELECT * FROM event_record WHERE cIndex=".$id;
+	$sql = "SELECT * FROM event_record WHERE caseID='$id'";
 	$res=$con->query($sql);
 	if ($res->num_rows > 0) {
 		while( $row = mysqli_fetch_array($res)) {
@@ -432,7 +432,7 @@ button.myBtn2{
 	if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 	}
-	$sql = "SELECT * FROM event_record WHERE cIndex=".$id;
+	$sql = "SELECT * FROM event_record WHERE caseID='$id'";
 	$res=$con->query($sql);
 	if ($res->num_rows > 0) {
 		while( $row = mysqli_fetch_array($res)) {
@@ -467,7 +467,7 @@ button.myBtn2{
 	if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 	}
-	$sql = "SELECT * FROM event_record WHERE cIndex=".$id;
+	$sql = "SELECT * FROM event_record WHERE caseID='$id'";
 	$res=$con->query($sql);
 	if ($res->num_rows > 0) {
 		while( $row = mysqli_fetch_array($res)) {
@@ -513,12 +513,11 @@ button.myBtn2{
 <?php
 	$id = $_GET['id'];
 	
-	$id2 = $_GET['id2'];
 	$con = new mysqli("localhost", "root", "", "event");
 	if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 	}
-	$sql = "SELECT * FROM event_record WHERE cIndex=".$id;
+	$sql = "SELECT * FROM event_record WHERE caseID='$id'";
 	$res=$con->query($sql);
 	if ($res->num_rows > 0) {
 		while( $row = mysqli_fetch_array($res)) {
@@ -533,9 +532,9 @@ button.myBtn2{
 <a href='create_event.php?app=0&id2=0&id=0' class='myBtn btn btn-primary btn-lg btn-block' role='button' id="myBtn">Create New Event</a>
 <?php
 	$id = $_GET['id'];
-	$id2 = $_GET['id2'];
-echo "<a href='create_event.php?app=1&id=".$_GET['id']."&id2=".$_GET['id2']."' class='myBtn btn btn-primary btn-lg btn-block' role='button' id='myBtn'>Create Similar Event</a>";
-echo "<a href='view_duty.php?id2=".$_GET['id2']."' class='myBtn btn btn-primary btn-lg btn-block' role='button' id='myBtn'>View Duty List</a>";
+	
+echo "<a href='view_duty.php?id2=".$_GET['id']."' class='myBtn btn btn-primary btn-lg btn-block' role='button' id='myBtn'>View Duty List</a>";
+echo "<a href='edit_event_info.php?cid=".$_GET['id']."' class='myBtn btn btn-primary btn-lg btn-block' role='button' id='myBtn'>Edit Info</a>";
 
 ?>
 </div>
@@ -608,6 +607,7 @@ echo "<a href='view_duty.php?id2=".$_GET['id2']."' class='myBtn btn btn-primary 
 			echo "<td>".strtoupper($biro)."</td>";
 			echo "<td>".strtoupper($row['name'])." ".strtoupper($row['lastname'])."</td>";
 			echo "<td><a href='user_profile.php?id=".$row["member_id"]."' target='_blank'>click me <i class='fa fa-external-link'></i></a></td>";
+			//echo "<td><a href='edit_event_info.php?cid=".$id."' target='_blank'>click me <i class='fa fa-external-link'></i></a></td>";
 			
 			echo "</tr>";
 		}

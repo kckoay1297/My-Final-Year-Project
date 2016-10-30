@@ -25,10 +25,12 @@ if(isset($_POST['submit'])){
 		 echo '<script language="javascript">';
 		 echo 'alert("Email Sent Succesfully!")';
 		 echo '</script>';  
+		  echo "<script>setTimeout(\"location.href = 'http://localhost/new_home.php';\",1500);</script>";
 	}else{
 		 echo '<script language="javascript">';
 		 echo 'alert("Email Sent.")';
 		 echo '</script>';  
+		  echo "<script>setTimeout(\"location.href = 'http://localhost/new_home.php';\",1500);</script>";
 	}
     
     // You can also use header('Location: thank_you.php'); to redirect to another page.

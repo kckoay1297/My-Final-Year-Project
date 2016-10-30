@@ -106,6 +106,12 @@ a.edit{
 a.edit:active{
 	color:#FF6464;
 }
+a.sm{
+	color:#7CC5FF;
+}
+a.sm:active{
+	color:#004C89;
+}
 label{
 	color:black;
 	font-size:24px;
@@ -223,7 +229,7 @@ i.sort:hover{
   <li><a href="http://localhost/email_start.php">Email</a></li>
   <li><a href="http://localhost/doc_list.php">Documents</a></li>
   <li><a href="http://localhost/readme.docx">About</a></li>
-  <li><a href="http://localhost/readme.docx">About</a></li>
+  <li><a href="http://localhost/event_search.php" target="_blank"><span class="glyphicon glyphicon-search"></span></a></li>
   <li class="right"><a href="#about">Logout</a></li>
 </ul>
 </div>
@@ -248,7 +254,7 @@ i.sort:hover{
 <?php
 $uid = $_GET['uid'];
 $cid = $_GET['cid'];
-$fname = $lname = $department = $biro = $po = $duty = $upfile = $usefile = $status = $name= $zero = $upload= null;
+$fname = $lname = $department = $biro = $po = $duty = $upfile = $usefile = $status = $name= $zero = $upload=$url=$url2= null;
 
 $con = new mysqli("localhost", "root", "", "event");
 if ($con->connect_error) {
@@ -303,6 +309,7 @@ $dutylist = array();
 $duty_index = array();
 if($res1->num_rows > 0){
 	while( $row1 = mysqli_fetch_array($res1)) {
+		
 		$fname = $row1['name'];
 		$lname = $row1['lastname'];
 		if($row1['department']=='CC'){
@@ -388,6 +395,9 @@ if($res1->num_rows > 0){
 		$res_d = $con->query($duty);
 		if($res_d->num_rows > 0){
 			while( $rowd = mysqli_fetch_array($res_d)) {
+				$url = $rowd['url'];
+				$url2 = $rowd['url2'];
+		
 				$duty_index[] = $rowd['ec_index'];
 				if($rowd['memberid'] == $uid){
 				if($rowd['status'] == '0'){
@@ -439,6 +449,15 @@ if($res1->num_rows > 0){
 				}else{
 					$list = $rowd['duty'];
 				}
+					if($url != null AND $url2 ==null){
+						$list .=  " <small><a href='$url' class='sm' target='_blank'>Useful Link</a></small>";
+					}elseif($url != null AND $url2 != null){
+						$list .=  " <small><a href='$url' class='sm' target='_blank'>Useful Link 1</a> <a href='$url2'  class='sm' target='_blank'>Useful Link 2</a></small>";
+					}elseif($url == null AND $url2 != null){
+						$list .=  " <small><a href='$url2' class='sm' target='_blank'>Useful Link </a></small>";
+					}else{
+						$url = $url2 = null;
+					}
 				$list .= "<input type='hidden' name='did' value=".$rowd['ec_index'].">";
 				$dutylist[] = array("name" => $name, "biro"=>$biro,"position"=>$po,"duty"=>$list,"date"=>$rowd['date1'],"upload"=>$upload,"template"=>"-","status"=>$update,"btn"=>$button);
 				
@@ -485,6 +504,7 @@ if($res1->num_rows > 0){
 		echo "</table>";
 		//echo $po_special;
 		if($po_special == 'president' or $po_special == 'vp' or $po_special == 'secretory' or $po_special == 'treasurer' or $po_special == 'dh'){
+			echo "<a href='end_event.php?cid=".$cid."' class='myBtn btn btn-primary btn-md btn-block' role='button'>End Event</a>";
 			echo "<a href='view_event_file.php?cid=".$cid."&uid=".$uid."' class='myBtn btn btn-primary btn-md btn-block' role='button'>View Uploaded File</a>";
 			echo "<a href='edit_event_info.php?cid=".$cid."' class='myBtn btn btn-primary btn-md btn-block' role='button'>Edit Event</a>";
 			$i = 0;

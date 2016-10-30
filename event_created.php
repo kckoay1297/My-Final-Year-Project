@@ -36,10 +36,12 @@ VALUES ('$userid','$userid2','$date','$pdate','$name','$budget','$department','$
 	 echo '<script language="javascript">';
 	 echo 'alert("Event created, waiting approval from admin.")';
 	 echo '</script>';
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/pending_list.php';\",1500);</script>";
  }else{
 	 echo '<script language="javascript">';
 	 echo 'alert("Failed to created")';
 	 echo '</script>';
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/event_recom.php';\",1500);</script>";
 }
  //echo "1 record added";
  mysqli_close($con);

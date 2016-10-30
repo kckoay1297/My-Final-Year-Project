@@ -9,7 +9,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Document List</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<title>Event Mangement System: To-do List</title>
 
 <style>
 body {
@@ -91,10 +95,21 @@ p{
 }
 
 a{
-	color: white;
+	color: blue;
 	text-decoration: none;
 }
-
+label{
+	color:black;
+	font-size:24px;
+}
+textarea{
+	font-size:16px;
+}
+div.info{
+	background:#FFD8D7;
+	margin:10px;
+	padding:10px;
+}
 @media (max-width:767px) {
 .logo {
 	margin: 15px;
@@ -110,16 +125,6 @@ p{
 	position: relative;
 	top:120px;
 	
-}
-p.br{
-	opacity:0.0;
-}
-a {
-    color:black;
-}
-a.header{
-	color: white;
-	text-decoration: none;
 }
 
 ul.topnav {
@@ -150,14 +155,44 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
-
-
-div.content{
-padding-left:60px;
-padding-bottom:5px;
-margin: 5px 0;
-width:auto;
-background-color:white;
+input.update{
+	margin:10px;
+}
+input.final{
+	width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	font-family: Helvetica;
+	font-size:120%;
+}
+input.final:hover{
+	background-color: #45a049;
+}
+input.final:active{
+	background-color: #45a049;
+	color: black;
+	transform: translateY(4px);
+}
+thead{
+	background-color:#333;
+	color:white;
+}
+tbody{
+	background-color:white;
+}
+th:hover{
+	color:#FDFFD0;
+}
+td:hover{
+	background-color:#FDFFD0;
+}
+i.sort:hover{
+	color:#FF8663;
 }
 </style>
 </head>
@@ -167,7 +202,7 @@ background-color:white;
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Document List</h4>
+			<h4 class="topspace">To-do List</h4>
 			</a>
 		</div>
 	</div>
@@ -185,33 +220,32 @@ background-color:white;
 </ul>
 </div>
 <br></br>
+<body>
+<div class="container">
+<h2 style="margin:5px">Edit Folder</h2>
+<form action="finish_edit_folder.php" method="post">
+<input type="text" id="myInput" placeholder="Folder Name..." class="form-control" name="name">
 
-<div class="content">
+<ul class="list-group">
 <?php
-$dir = "template/";
-$ds = scandir($dir);
-$thelist = '';
-$dir = '';
-foreach ($ds as &$d) {
-    if ($d!='.' && $d!='..' )
-    {
-        echo ucwords($d).'<br>';
-		$dir = 'template/'.$d.'/';
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file);
-				$thelist .= '<li><a target="_blank" href="template/'.$d.'/'.$file.'" >'.ucwords($withoutExt).'</a></li>';
-			}
-			}
-		closedir($handle);
-		}
-	echo '<ul>'.$thelist.'</ul>';
-    }
-}
 
+$name = $_GET['name'];
+
+echo "<input type='hidden' name='dir' value='$name'>";
+echo "<button type = 'submit' name = 'submit' value = 'submit' class='btn btn-success btn-md btn-block' >Add</button></form>";
+		 
 ?>
+</ul>
 </div>
-<script src="js/bootstrap.min.js"></script>
 </body>
+<script type="text/javascript">
+/*function CheckColors(val){
+ var element=document.getElementById('url');
+ if(val=='Empty'||val=='other')
+   element.style.display='block';
+ else  
+   element.style.display='none';
+}*/
+
+</script> 
 </html>

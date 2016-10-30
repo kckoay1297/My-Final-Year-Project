@@ -582,6 +582,7 @@ if ($res1->num_rows > 0) {
 				echo "</tr>";
 			}
 			echo "<input type='hidden' name='cid' value='$cid'>";
+			echo "<input type='hidden' name='sender' value=".$uid.">";
         ?>
 </tbody>
 </table>

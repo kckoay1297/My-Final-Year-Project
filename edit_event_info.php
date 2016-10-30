@@ -324,7 +324,7 @@ form{
   <li><a href="http://localhost/email_start.php">Email</a></li>
   <li><a href="http://localhost/doc_list.php">Documents</a></li>
   <li><a href="http://localhost/readme.docx">About</a></li>
-  <li><a href="http://localhost/readme.docx">About</a></li>
+  <li><a href="http://localhost/event_search.php" target="_blank"><span class="glyphicon glyphicon-search"></span></a></li>
   <li class="right"><a href="#about">Logout</a></li>
 </ul>
 </div>
@@ -659,7 +659,7 @@ form{
 			
 			echo "<div class='col-xs-10'>";
 			echo "<label for='status'>Status:</label>";
-			echo "<select class='form-control ' id='sel1' name='status'>";
+			echo "<select class='form-control ' id='sel1' disabled>";
 			if($status == 'ONGOING'){
 				echo "<option value='ongoing' selected='selected'>ONGOING</option>";
 				echo "<option value='cancelled'>CANCELLED</option>";
@@ -670,7 +670,7 @@ form{
 				echo "<option value='cancelled' selected='selected'>CANCELLED</option>";
 				echo "<option value='setback'>SETBACK</option>";
 				echo "<option value='success'>SUCCESS</option>";
-			}elseif($level == 'SETBACK'){
+			}elseif($status == 'SETBACK'){
 				echo "<option value='ongoing'>ONGOING</option>";
 				echo "<option value='cancelled'  selected='selected'>CANCELLED</option>";
 				echo "<option value='setback'>SETBACK</option>";
@@ -685,7 +685,9 @@ form{
 			echo "<br></br>";
 			
 			echo "</div>";
+			echo "<input type='hidden' name='status' value=".$status.">";
 			echo "<input type='hidden' name='cid' value=".$cid.">";
+			echo "<input type='hidden' name='status2' value='0'>";
 	
 ?>
 	<br></br>

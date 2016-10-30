@@ -9,7 +9,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Select People</title>
+	<title>Event Mangement System: Member</title>
 <script>
 		var people, asc1 = 1,
             asc2 = 1,
@@ -160,7 +160,10 @@ p{
 	
 }
 a {
-    color:black;
+    color:#F30000;
+}
+a:active{
+	color:#9F0000;
 }
 a.header{
 	color: white;
@@ -195,15 +198,21 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
+
+a.disabled {
+    pointer-events: none;
+   cursor: default;
+   color:#D5D5D5;
+}
 </style>
 </head>
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
 			
-			<a class="header" href="hhttp://localhost/new_home.php">
+			<a class="header" href="http://localhost/homepage.html">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Email: Select People</h4>
+			<h4 class="topspace">Member</h4>
 			</a>
 		</div>
 	</div>
@@ -221,89 +230,66 @@ ul.topnav li.right {float: right;}
 </ul>
 </div>
 <br></br>
-<div class="table-responsive container">
-<form method="post" action="all_email_sent_b.php">          
+<div class="table-responsive container">          
 <table class="table table-condensed table-striped table-bordered">
 <thead>
   <tr>
-    <th>Email To:</th>
-	<th>CC: </th>
-	<th>Name <i class="fa fa-sort sort" onclick="sort_table(people, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-    <th>Email <i  class="fa fa-sort sort" onclick="sort_table(people, 1, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+    <th>Firstname <i class="fa fa-sort sort" onclick="sort_table(people, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+    <th>Lastname <i  class="fa fa-sort sort" onclick="sort_table(people, 1, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
     <th>Department <i  class="fa fa-sort sort" onclick="sort_table(people, 2, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
 	<th>Position <i class="fa fa-sort sort" onclick="sort_table(people, 3, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-	<th>Phone <i class="fa fa-sort sort" onclick="sort_table(people, 4, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-	</tr>
+	<th>Staff ID <i class="fa fa-sort sort" onclick="sort_table(people, 4, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>Phone <i class="fa fa-sort sort" onclick="sort_table(people, 5, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>IC Number <i  class="fa fa-sort sort" onclick="sort_table(people, 6, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>View Profile </th>
+	  </tr>
 </thead>
 
   <tbody id="member">
-<?php
+  <?php
+  $userid = 15;
   $conn = new mysqli("localhost", "root", "", "profile");
   if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }		
-	$sql="SELECT * FROM user";
+	$sql="SELECT id,email, staffid, designation, department, firstname, lastname,phone,icnumber FROM user WHERE id != ".$userid;
 	$res = $conn->query($sql);
 	while( $row = mysqli_fetch_array($res)) {
 		echo "<tr>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='to_list[]' value='".$row['email']."'>Choose</label></td>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='cc_list[]' value='".$row['email']."'>Choose</label></td>";
-		echo "<td>".$row['firstname']." ".$row['lastname']."</td>";
-		echo "<td>".$row['email']."</td>";
+		echo "<td>".$row['firstname']."</td>";
+		echo "<td>".$row['lastname']."</td>";
 		echo "<td>".$row['department']."</td>";
 		echo "<td>".$row['designation']."</td>";
+		echo "<td>".$row['staffid']."</td>";
 		echo "<td>".$row['phone']."</td>";
+		echo "<td>".$row['icnumber']."</td>";
+		$sql2 = "SELECT * FROM admin";
+		$res2 = $conn->query($sql2);
+		$idid = $row["id"];
+		$func = "<td><a href='user_profile.php?id=".$row["id"]."' target='_blank'><i class='fa fa-external-link'></i> View </a>
+		<a href='promote_user.php?id=".$row["id"]."&id2=".$userid."' target='_blank'><i class='fa fa-chevron-circle-up'></i> Promote </a>		
+		<a href='edit_user_profile.php?id=".$row["id"]."' target='_blank'><i class='fa fa-edit'></i> Edit </a>
+		<a href='delete_user_profile.php?id=".$row["id"]."' target='_blank'><i class='fa fa-ban'></i> Remove </a></td>";
+			while( $row2 = mysqli_fetch_array($res2)) {
+				
+				if($idid == $row2['user_id']){
+					echo "hello";
+					$func = "<td><a href='user_profile.php?id=".$row["id"]."' target='_blank'><i class='fa fa-external-link'></i> View </a>
+						<a href='promote_user.php?id=".$row["id"]."&id2=".$userid."' target='_blank'><i class='fa fa-chevron-circle-up'></i> Promote </a>			
+		<a class='disabled' target='_blank' disabled><i class='fa fa-edit'></i> Edit </a>
+		<a class='disabled' target='_blank' disabled><i class='fa fa-ban'></i> Remove </a></td>";
+				}
+			}
+		
+		
+		echo $func;
 		echo "</tr>";
 	}
-	$sql1="SELECT * FROM student";
-	$res1 = $conn->query($sql1);
-	while( $row1 = mysqli_fetch_array($res1)) {
-		echo "<tr>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='to_list[]' value='".$row1['email']."'>Choose</label></td>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='cc_list[]' value='".$row1['email']."'>Choose</label></td>";
-		echo "<td>".$row1['firstname']." ".$row1['lastname']."</td>";
-		echo "<td>".$row1['email']."</td>";
-		echo "<td>".$row1['department']."</td>";
-		echo "<td>".$row1['level']."</td>";
-		echo "<td>".$row1['phone']."</td>";
-		echo "</tr>";
-	}
-	$sql2="SELECT * FROM outsider";
-	$res2 = $conn->query($sql2);
-	while( $row2 = mysqli_fetch_array($res2)) {
-		echo "<tr>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='to_list[]' value='".$row2['email']."'>Choose</label></td>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='cc_list[]' value='".$row2['email']."'>Choose</label></td>";
-		echo "<td>".$row2['firstname']." ".$row2['lastname']."</td>";
-		echo "<td>".$row2['email']."</td>";
-		echo "<td>".$row2['company']."</td>";
-		echo "<td>".$row2['position']."</td>";
-		echo "<td>".$row2['phone']."</td>";
-		echo "</tr>";
-	}
-	if(isset($_POST['submit'])){
-    $from = $_POST['from']; // this is your Email address
-    //$to = $_POST['to']; // this is the sender's Email address
-    $subject = "<b>".htmlspecialchars($_POST['subject'])."</b>";
-	$content = $_POST['message'];
-	$lt = htmlspecialchars($_POST['endtext']);
-	$message = $content. "<br>". $lt."</br>";
-	echo "<input type='hidden' name='from' value='".$from."' />";
-	echo "<input type='hidden' name='subject' value='".$subject."' />";
-	echo "<input type='hidden' name='message' value='".$message."' />";
-	}
-?>
+  ?>
   </tbody>
 </table>
 
-<input type='submit' name='submit' value='Submit' class='btn btn-success btn-md btn-block'>
- 
-</form>
-</table>
 
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php 
-
-?>

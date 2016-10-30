@@ -263,6 +263,7 @@ width:auto;
   <li><a href="http://localhost/email_start.php">Email</a></li>
   <li><a href="http://localhost/doc_list.php">Documents</a></li>
   <li><a href="http://localhost/readme.docx">About</a></li>
+  <li><a href="http://localhost/event_search.php" target="_blank"><span class="glyphicon glyphicon-search"></span></a></li>
   <li class="right"><a href="#about">Logout</a></li>
 </ul>
 </div>

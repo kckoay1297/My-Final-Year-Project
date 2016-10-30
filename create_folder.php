@@ -32,6 +32,7 @@ box-shadow:
 .container {
 	width: 1200px;
 	margin: 0px auto;
+	overflow:auto;
 }
 .clearfix {
 	clear: both;
@@ -187,30 +188,39 @@ background-color:white;
 <br></br>
 
 <div class="content">
+<table class="table table-condensed table-striped table-bordered" align="left">
+<thead>
+<tr>
+	<th>Folder</th>
+	<th>Action</th>
+</tr>
+	</thead>
+	<tbody>
 <?php
+$dire = array();
 $dir = "template/";
 $ds = scandir($dir);
-$thelist = '';
-$dir = '';
-foreach ($ds as &$d) {
-    if ($d!='.' && $d!='..' )
-    {
-        echo ucwords($d).'<br>';
-		$dir = 'template/'.$d.'/';
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file);
-				$thelist .= '<li><a target="_blank" href="template/'.$d.'/'.$file.'" >'.ucwords($withoutExt).'</a></li>';
-			}
-			}
-		closedir($handle);
-		}
-	echo '<ul>'.$thelist.'</ul>';
+$thelist = null;
+$con = new mysqli("localhost", "root", "", "event");
+$duty = $f = $n= null;
+if ($handle = opendir($dir)) {
+    $blacklist = array('.', '..', 'somedir', 'somefile.php');
+    while (false !== ($file = readdir($handle))) {
+        if (!in_array($file, $blacklist)) {
+            //echo ;
+			$dire[] = $file;
+        }
     }
+    closedir($handle);
 }
-
+for($x = 0;$x < count($dire);$x++){
+	echo "<tr><td>".ucwords($dire[$x])."</td><td><a href='edit_folder.php?name=".$dire[$x]."' target='_blank'><i class='fa fa-edit'></i> Edit </a>
+	<a href='delete_folder.php?name=".$dire[$x]."' target='_blank'><i class='fa fa-ban'></i> Remove </a></td></tr>";
+}
+echo "<a href='add_folder.php' class='myBtn btn btn-primary btn-md btn-block' role='button'>Add Folder</a>";	
 ?>
+</tbody>
+</table>
 </div>
 <script src="js/bootstrap.min.js"></script>
 </body>

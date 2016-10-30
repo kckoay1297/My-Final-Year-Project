@@ -6,7 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 body {
     background: #000428; /* fallback for old browsers */
@@ -116,6 +121,13 @@ button.choice:active, button.choice:focus {
 	color: black;
 	transform: translateY(4px);
 }
+input.phone{
+	color:black;
+	background-color:black;
+	width:450px;
+	height:250px;
+	overflow:auto;
+}
 
 input.input{
 	padding: 12px 12px;
@@ -159,6 +171,7 @@ textarea {
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
+	color:black;
     resize: none;
 	font-family: Helvetica;
 	font-size: 14px;
@@ -301,7 +314,7 @@ form{
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Edit Profile Info</h4>
+			<h4 class="topspace">Edit Email Info</h4>
 			</a>
 		</div>
 	</div>
@@ -321,71 +334,38 @@ form{
 <br></br>
 <div class="inner-container">
 <div class="box center">
-	<h2 class="topspace form">Edit Your Info</h2>
-	<form method="post" action="info_edit.php">
-
-	<h3 class='topspace'>Edit Name</h3>
+	<h2 class="topspace form">Edit Email Info</h2>
+	<form method="post" action="finish_email_edit.php">
 <?php
+	$eid = $_GET['id'];
 	$conn1 = new mysqli("localhost", "root", "", "profile");
 	if ($conn1->connect_error) {
     die("Connection failed: " . $conn1->connect_error);
 }
-	$phone = "SELECT phone FROM user WHERE id=1";
-	$res = $conn1->query($phone);
+	$email = null;
+	$sql = "SELECT * FROM def_tempt WHERE temp_id=".$eid;
+	$res = $conn1->query($sql);
 	if ($res->num_rows > 0) {
-		echo "<textarea class='phone' id='phone' name='phone'>";
 		while($row1 = $res->fetch_assoc()) {
-			echo $row1["phone"];
+			$email = $row1['temp'];
 		}
-		echo "</textarea>";
 	}else {
 		echo "0 results";
 	}
 	$conn1->close();
-?>
-	<br></br>
-	<h3 class='topspace'>Edit IC Number</h3>
-<?php
-	$conn = new mysqli("localhost", "root", "", "profile");
-	if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-	$ic = "SELECT icnumber FROM user WHERE id = 1";
-	$res1 = $conn->query($ic);
-	if ($res1->num_rows > 0) {
-		echo "<textarea class='ic' id='ic' name='ic'>";
-		while($row2 = $res1->fetch_assoc()) {
-			echo $row2["icnumber"];
-		}
-		echo "</textarea>";
-	}else {
-		echo "0 results";
-	}
-	$conn->close();
-?>
-	<br></br>
-	<h3 class='topspace'>View Staff ID</h3>
-	<?php
-	$con = new mysqli("localhost", "root", "", "profile");
-	if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-}
-	$staffid = "SELECT staffid FROM user WHERE id = 1";
-	$res = $con->query($staffid);
-	if ($res->num_rows > 0) {
-		echo "<textarea readonly id='id' name='id' class='view'>";
-		while($row3 = $res->fetch_assoc()) {
-			echo $row3["staffid"];
-		}
-		echo "</textarea>";
-	}else {
-		echo "0 results";
-	}
-	$con->close();
+	echo "<br>";
+	echo "<label for='date'>Edit Email Template:</label>";
+	echo "<textarea  class='form-control phone' rows='10' id='email' type='text' name='email' required>".$email."</textarea>";
+	echo "<input type='hidden' name='id' value=".$eid.">";
+	echo "<br>";
+	
+	
 ?>
 	<br></br>
     <input type="submit" name="submit" value="Submit" class="final">
+	</form>
 </div>
 </div>
 </body>
+
 </html>

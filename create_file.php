@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 <style>
 body {
     background: url("http://www.borongaja.com/data_images/out/25/663969-night-urban-landscape.jpg") ;
+        
 	overflow = auto;
 	width=100%;
 	margin: 0 auto;
@@ -170,17 +175,6 @@ width:auto;
 div.nav{
 padding-left:60px;
 }
-input.email{
-	width:250px;
-	height:150px;
-	position: relative;
-	top: 40px;
-	left: 40px;
-}
-input.email:active {
-  background-color: #3e8e41;
-  transform: translateY(4px);
-}
 
 
 @media (max-width:767px) {
@@ -235,6 +229,61 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
+
+.navbar {
+      font-family: Montserrat, sans-serif;
+      margin-bottom: 0;
+      background-color: #2d2d30;
+      border: 0;
+      font-size: 11px !important;
+      letter-spacing: 4px;
+      opacity: 0.9;
+  }
+  .navbar li a, .navbar .navbar-brand { 
+      color: #d5d5d5;
+  }
+  .navbar-nav li a:hover {
+      color: #fff !important;
+  }
+  .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #29292c ;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+  }
+  .open .dropdown-toggle {
+      color: #fff;
+      background-color: #555;
+  }
+  .dropdown-menu li a {
+      color: #000 !important;
+  }
+  .dropdown-menu li a:hover {
+      background-color: red ;
+  }
+  
+  
+  button.menu{
+	  width:220px ;
+	 height:5px;
+  }
+
+#search{
+	width: 200px; margin: 0 auto; max-height: 120px; border: 1px solid #f4f4f4; overflow: hidden;
+	margin:5px;
+}
+#text{
+	width: 200px; padding: 5px; border: 1px solid #f4f4f4; border-radius: 3px;
+	margin:5px;
+}
+#searchtitle{
+	width: 200px; padding: 5px; background: #fff;
+	margin:5px;
+}
+#searchtitle:hover{
+	background: #f4545f;
+}
 </style>
 </head>
 <body>
@@ -244,13 +293,15 @@ ul.topnav li.right {float: right;}
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Homepage</h4>
+			<h4 class="topspace">Admin</h4>
 			</a>
 		</div>
 	</div>
 </div>
-<div id="nav">
-<ul class="topnav">
+
+
+<div id="nav collapse navbar-collapse" id="myNavbar">
+<ul class="topnav  nav-pills">
   <li><a class="active" href="http://localhost/new_home.php">Home</a></li>
   <li><a href="http://localhost/profile.php">Profile</a></li>
   <li><a href="http://localhost/memberlist.php">Member</a></li>
@@ -261,61 +312,68 @@ ul.topnav li.right {float: right;}
   <li class="right"><a href="#about">Logout</a></li>
 </ul>
 </div>
-<title>Event Recommendation</title>
+
+<title>Admin Panel</title>
 <br></br>
 
 <div class="content">
-<a href="http://localhost/positive_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_available</i><br>Positive</br></button></a>
-<a href="http://localhost/negative_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_busy</i><br>Negative</br></button></a>
-<a href="http://localhost/custom_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_note</i><br>Customized</br></button></a>
+<a href="http://localhost/manage_link.php"><button type="btn" class="btn btn-primary btn-lg sharp ">Add Link</button></a>
+<a href="http://localhost/create_folder.php"><button type="btn" class="btn btn-primary btn-lg sharp ">Create Folder</button></a>
+<a href="http://localhost/upload_file.php"><button type="btn" class="btn btn-primary btn-lg sharp ">Upload File</button></a>
+
+
+
 </div>
 
 <div></div>
 </div>
 
-<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-					<li>
-                        <a href="http://myum.um.edu.my/" target="_blank">UM</a>
-                    </li>
-                    <li>
-                        <a href="http://myum.um.edu.my/" target="_blank">Staff Portal</a>
-                    </li>
-                    <li>
-                        <a href="http://www.fsktm.um.edu.my/" target="_blank">FCSIT</a>
-                    </li>
-                    <li>
-                        <a href="https://docs.google.com/forms/d/1UsLkpzp73qr0Vfb8y8Q0l8WT7C9yRmaSdxHjMhw5_R8/viewform" target="_blank">Room Booking</a>
-                    </li>
-					<li>
-                        <a href="http://hep.um.edu.my/" target="_blank">HEP</a>
-                    </li>
-					<li>
-                        <a href="http://vmis.um.edu.my/" target="_blank">Bus Booking</a>
-                    </li>
-					<li>
-                        <a href="https://siswa.um.edu.my/" target="_blank">Siswamail</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
-<p> prototype</p>
-<script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip();
+  
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+
+function search(string){
+	var xmlhttp;
+	if(window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}else{
+		xmlhttp = new ActiveXObject("XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			document.getElementById("search").innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET", "search.php?s="+string, true);
+	xmlhttp.send(null);
+}
+</script>
 </body>
 </html>

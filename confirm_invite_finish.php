@@ -22,7 +22,7 @@ if(mysqli_query($con,$sql)){
 	 }
 	 }else{
 	echo '<script language="javascript">';
-	 echo 'alert("Failed to update. OMG")';
+	 echo 'alert("Failed to update.")';
 	 echo '</script>';
 	 }
  $profile = "SELECT * FROM user WHERE id = ".$uid;
@@ -46,8 +46,10 @@ if($res1->num_rows > 0){
  $sql1 = "INSERT INTO member_record( event_id, member_id, name, lastname, position, department) VALUES ('$cid','$uid','$fname','$lname','$po','$de')";
  echo $sql1;
  if(mysqli_query($con,$sql1)){
-	 echo "It worked!";
+	 //echo "It worked!";
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/new_home.php';\",1500);</script>";
  }else{
-	 echo "No";
+	 //echo "No";
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/new_home.php';\",1500);</script>";
  }
 ?>

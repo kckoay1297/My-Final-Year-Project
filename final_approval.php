@@ -54,15 +54,18 @@ VALUES ('$cid','$cName','$pDate','$cDate','$budget','$department','$type','$leve
 		 echo '<script language="javascript">';
 	 echo 'alert("Event Info Updated.")';
 	 echo '</script>';
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/hosting_event.php';\",1500);</script>";
 	 }else{
 		 echo '<script language="javascript">';
 	 echo 'alert("Failed to update. OMG")';
 	 echo '</script>';
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/hosting_event.php';\",1500);</script>";
 	 }
  }else{
 	 echo '<script language="javascript">';
 	 echo 'alert("Failed to update, duplicate info.")';
 	 echo '</script>';
+	 echo "<script>setTimeout(\"location.href = 'http://localhost/hosting_event.php';\",1500);</script>";
 }
  //echo "1 record added";
  mysqli_close($con);

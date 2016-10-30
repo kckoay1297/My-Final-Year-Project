@@ -215,6 +215,7 @@ i.sort:hover{
   <li><a href="http://localhost/email_start.php">Email</a></li>
   <li><a href="http://localhost/doc_list.php">Documents</a></li>
   <li><a href="http://localhost/readme.docx">About</a></li>
+  <li><a href="http://localhost/event_search.php" target="_blank"><span class="glyphicon glyphicon-search"></span></a></li>
   <li class="right"><a href="#about">Logout</a></li>
 </ul>
 </div>
@@ -227,15 +228,33 @@ i.sort:hover{
 
 <ul class="list-group">
 <?php
-$uid = $_GET['uid'];
-$cid = $_GET['cid'];
-echo "<input type='hidden' name='uid' value='".$uid."' />";
-echo "<input type='hidden' name='cid' value='".$cid."' />";
-echo "<button type = 'submit' name = 'submit' value = 'submit' class='btn btn-success btn-md btn-block' >Add</button></form>";
+
 $con = new mysqli("localhost", "root", "", "event");
 if ($con->connect_error) {
      die("Connection failed: " . $con->connect_error);
 }
+
+$uid = $_GET['uid'];
+$cid = $_GET['cid'];
+echo "<input type='hidden' name='uid' value='".$uid."' />";
+echo "<input type='hidden' name='cid' value='".$cid."' />";
+
+
+$url = "SELECT * FROM link ORDER BY l_index";
+$rl = $con->query($url);
+echo "<h2 style='margin:5px'>Choose Link</h2>";
+      echo "<select class='form-control' id='sel1' name='url'>";
+	  echo "<option value=''></option>";
+while($row1 = mysqli_fetch_array($rl)){
+	echo $row1['link'];
+	echo "<option value='".$row1['link']."'>".$row1['name']."</option>";
+}
+echo "</select>";
+echo "<h2 style='margin:5px'>Other Link</h2>";
+echo "<input class='form-control' type='url' name='url2' id='url2'/>";
+echo "<br>";
+echo "<button type = 'submit' name = 'submit' value = 'submit' class='btn btn-success btn-md btn-block' >Add</button></form>";
+
 $sql = "SELECT * FROM event_checklist WHERE caseID = '$cid' AND memberid =".$uid;
 $res = $con->query($sql);
 if($res->num_rows > 0){
@@ -256,4 +275,14 @@ if($res->num_rows > 0){
 </ul>
 </div>
 </body>
+<script type="text/javascript">
+/*function CheckColors(val){
+ var element=document.getElementById('url');
+ if(val=='Empty'||val=='other')
+   element.style.display='block';
+ else  
+   element.style.display='none';
+}*/
+
+</script> 
 </html>

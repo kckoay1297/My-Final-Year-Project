@@ -321,17 +321,18 @@ form{
 <br></br>
 <div class="inner-container">
 <div class="box center">
-	<h2 class="topspace form">Edit Your Info</h2>
-	<form method="post" action="info_edit.php">
+	<h2 class="topspace form">Edit User Info</h2>
+	<form method="post" action="admin_info_edit.php">
 
-	<h3 class='topspace'>Edit Name</h3>
+	<h3 class='topspace'>Edit Phone</h3>
 <?php
-	$conn1 = new mysqli("localhost", "root", "", "profile");
-	if ($conn1->connect_error) {
-    die("Connection failed: " . $conn1->connect_error);
+	$id = $_GET['id'];
+	$conn = new mysqli("localhost", "root", "", "profile");
+	if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-	$phone = "SELECT phone FROM user WHERE id=1";
-	$res = $conn1->query($phone);
+	$phone = "SELECT phone FROM user WHERE id=".$id;
+	$res = $conn->query($phone);
 	if ($res->num_rows > 0) {
 		echo "<textarea class='phone' id='phone' name='phone'>";
 		while($row1 = $res->fetch_assoc()) {
@@ -341,16 +342,8 @@ form{
 	}else {
 		echo "0 results";
 	}
-	$conn1->close();
-?>
-	<br></br>
-	<h3 class='topspace'>Edit IC Number</h3>
-<?php
-	$conn = new mysqli("localhost", "root", "", "profile");
-	if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-	$ic = "SELECT icnumber FROM user WHERE id = 1";
+	echo "<h3 class='topspace'>Edit IC Number</h3>";
+	$ic = "SELECT icnumber FROM user WHERE id=".$id;
 	$res1 = $conn->query($ic);
 	if ($res1->num_rows > 0) {
 		echo "<textarea class='ic' id='ic' name='ic'>";
@@ -361,19 +354,11 @@ form{
 	}else {
 		echo "0 results";
 	}
-	$conn->close();
-?>
-	<br></br>
-	<h3 class='topspace'>View Staff ID</h3>
-	<?php
-	$con = new mysqli("localhost", "root", "", "profile");
-	if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-}
-	$staffid = "SELECT staffid FROM user WHERE id = 1";
-	$res = $con->query($staffid);
+	echo "<h3 class='topspace'>Edit Staff ID</h3>";
+	$staffid = "SELECT staffid FROM user WHERE id=".$id;
+	$res = $conn->query($staffid);
 	if ($res->num_rows > 0) {
-		echo "<textarea readonly id='id' name='id' class='view'>";
+		echo "<textarea class='ic' id='ic' name='sid'>";
 		while($row3 = $res->fetch_assoc()) {
 			echo $row3["staffid"];
 		}
@@ -381,9 +366,26 @@ form{
 	}else {
 		echo "0 results";
 	}
-	$con->close();
+	echo "<h3 class='topspace'>Edit Department and Position</h3>";
+	$de = "SELECT * FROM user WHERE id=".$id;
+	$res = $conn->query($de);
+	if ($res->num_rows > 0) {
+		
+		while($row4 = $res->fetch_assoc()) {
+			echo "<textarea class='ic' id='department' name='department'>";
+			echo $row4["department"];
+			echo "</textarea>";
+			echo "<br>";
+			echo "<textarea class='ic' id='position' name='position'>";
+			echo $row4["designation"];
+			echo "</textarea>";
+		}
+		
+	}else {
+		echo "0 results";
+	}
+	echo "<input type='hidden' name='id' value=".$id.">";
 ?>
-	<br></br>
     <input type="submit" name="submit" value="Submit" class="final">
 </div>
 </div>

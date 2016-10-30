@@ -25,6 +25,7 @@
 <?php 
 if(isset($_POST['submit'])){
 	$cid = $_POST['cid'];
+	$sender = $_POST['sender'];
 	$member = array();
 	$con = new mysqli("localhost","root","","profile");
 	if($con->connect_error){
@@ -72,6 +73,7 @@ if(isset($_POST['submit'])){
 					 echo "<option value='OTR'>Other</option>";
 					 echo "</select>";
 					 echo "<input type='hidden' name='uid[]' value='$member[$i]'>";
+					 echo "<input type='hidden' name='sender' value=".$sender.">";
 					 echo "</td>";
 					 echo "</tr>";
 				 }

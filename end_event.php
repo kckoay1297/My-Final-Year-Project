@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,19 +8,17 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<title>Event Mangement System: Create Event</title>
-
 <style>
 body {
-    background-color:white;
-	overflow = auto;
+    background: #000428; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #000428 , #004e92); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #000428 , #004e92); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */overflow = auto;
 	width=100%;
 	margin: 0 auto;
-	
 }
 
 #wrapper {
@@ -83,28 +80,120 @@ h4.topspace{
 	left:1px;
 	text-decoration: underline;
 }
-
-p{
-	font-family: Helvetica;
-	color: black;
-	text-align:center;
-	float: clear;
-	position: relative;
-	top:120px;
-	
+h2.form{
+	padding-left:40px;
 }
-
 a{
 	color: white;
 	text-decoration: none;
 }
-label{
+<--input[type=text], select {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+	font-family: Helvetica;
+	font-size:120%;
+}-->
+
+button.choice {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	font-family: Helvetica;
+	font-size:120%;
+}
+
+button.choice:hover {
+    background-color: #45a049;
+}
+
+button.choice:active, button.choice:focus {
+    background-color: #45a049;
+	color: black;
+	transform: translateY(4px);
+}
+input.phone{
 	color:black;
-	font-size:24px;
+	background-color:black;
 }
-textarea{
-	font-size:16px;
+
+input.input{
+	padding: 12px 12px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+	font-family: Helvetica;
+	font-size: 14px;
 }
+
+input.final{
+	width: 40%;
+    background-color: #FF3B3B  ;
+    color: white;
+    //padding: 12px 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	font-family: Helvetica;
+	font-size:120%;
+}
+input.final:hover{
+	background-color: #FF6F6F  ;
+}
+input.final:active{
+	background-color: #FF6F6F  ;
+	color: #DCDCDC;
+	transform: translateY(4px);
+}
+
+label {
+	font-family: Helvetica;
+}
+textarea {
+    width: 40%;
+    height: 50px;
+    padding: 12px 12px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+	color:black;
+    resize: none;
+	font-family: Helvetica;
+	font-size: 14px;
+}
+textarea.view{
+	width: 40%;
+    height: 50px;
+    padding: 12px 12px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #959595;
+    resize: none;
+	font-family: Helvetica;
+	font-size: 14px;
+}
+textarea.phone,textarea.ic{
+	color:black;
+}
+a.edit{
+	color:blue;
+	text-decoration: initial;
+}
+
+
 @media (max-width:767px) {
 .logo {
 	margin: 15px;
@@ -120,6 +209,13 @@ p{
 	position: relative;
 	top:120px;
 	
+}
+a {
+    color:#6d0058;
+}
+a.header{
+	color: white;
+	text-decoration: none;
 }
 
 ul.topnav {
@@ -150,35 +246,72 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
-input.final{
-	width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 12px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-	font-family: Helvetica;
-	font-size:120%;
+.inner {
+  //position: absolute;
 }
-input.final:hover{
-	background-color: #45a049;
+.inner-container{
+  width:500px;
+  height:400px;
+  //position:relative;
+  overflow:hidden;
 }
-input.final:active{
-	background-color: #45a049;
-	color: black;
-	transform: translateY(4px);
+
+.box{
+  position:absolute;
+  font-family:Helvetica;
+  color:white;
+  padding:20px 20px;
+  background-color:rgba(0,0,0,0.3);
+  margin-left:20%;
+  width: 50%;
+}
+.box input{
+  display:block;
+  width:40%;
+  margin-top:20px;
+  padding:15px;
+  color:#fff;
+  border:0;
+}
+.box input:focus,.box input:active,.box button:focus,.box button:active{
+  outline:none;
+}
+
+.box button{
+  background:#742ECC;
+  border:0;
+  color:#fff;
+  padding:10px;
+  font-size:20px;
+  width:330px;
+  margin:20px auto;
+  display:block;
+  cursor:pointer;
+}
+.box button:active{
+  background: #17202a ;
+}
+.box p{
+  font-size:14px;
+  text-align:center;
+}
+.box p span{
+  cursor:pointer;
+  color:#666;
+}
+form{
+	padding-left:40px;
 }
 </style>
-</head>
+<body>
+<title>Event Management: Profile Edit</title>
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Creating Event</h4>
+			<h4 class="topspace">Edit Profile Info</h4>
 			</a>
 		</div>
 	</div>
@@ -196,36 +329,49 @@ input.final:active{
 </ul>
 </div>
 <br></br>
-<div class="container">
-<h2>Create Event:Information & Proposal</h4>
-<h3>Section A:Information</h3>
+<div class="inner-container">
+<div class="box center">
+	<h2 class="topspace form">Edit Event Info</h2>
+	<form method="post" action="finish_event_edit.php">
 <?php
-	$app = $_GET["app"];
-	$id = $_GET["id"];
-	$id2 = $_GET["id2"];
-	echo "<form  method='post' action='event_created.php'>";
-	echo "<div class='form-group'>";
-	
-	if($app == 1){
-	$con = new mysqli("localhost", "root", "", "event");
-	if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-	}
-	$sql = "SELECT * FROM event_record WHERE caseID ='$id2'";
-	$res=$con->query($sql);
+	$cid = $_GET['cid'];
+	$conn1 = new mysqli("localhost", "root", "", "event");
+	if ($conn1->connect_error) {
+    die("Connection failed: " . $conn1->connect_error);
+}
+	$date = $budget = $department = $type = $level = $income = $cSize = $feedback = $aPpt = $desc = $status = null;
+	$sql = "SELECT * FROM event_record WHERE caseID='$cid'";
+	$res = $conn1->query($sql);
 	if ($res->num_rows > 0) {
-		while( $row = mysqli_fetch_array($res)) {
-			echo "<label for='ename'>Event Name:</label>";
-			echo "<input type='text' class='form-control' id='event_name' name='name' placeholder='Similary Name: ".htmlspecialchars($row['caseName'])."'>";
-			echo "<label for='ename'>Event Date:</label>";
-			echo "<input type='text' class='form-control' id='datepicker' name='date' value=".$row['caseDate'].">";
-			echo "<label for='ename'>Propose Date:</label>";
-			echo "<input type='text' class='form-control' id='datepicker1' name='pdate' value=".$row['propose_date'].">";
-			echo "<label for='ename'>Budget:</label>";
-			echo "<input type='number' min='0' max='20000' class='form-control' id='budget' name='budget'  value=".$row['budget']." step='0.01'>";
-			echo "<label for='department'>Department:</label>";
+		while($row1 = $res->fetch_assoc()) {
+			$date = $row1['caseDate'];
+			$budget = $row1['budget'];
+			$department = $row1['department'];
+			$type = $row1['type'];
+			$level = $row1['level'];
+			$income = $row1['actualIncome'];
+			$cSize = $row1['cmtSize'];
+			$feedback = $row1['feedback'];
+			$aPpt = $row1['actualPtcpt'];
+			$desc = $row1['description'];
+			$status =strtoupper($row1['status']);
+		}
+	}else {
+		echo "0 results";
+	}
+	$conn1->close();
+	echo "<br>";
+	echo "<label for='date'>Date:</label>";
+	echo "<input  class='form-control phone' id='datepicker' type='text' value='$date' name='date' required>";
+	echo "<br>";
+	echo "<label for='income'>Income:</label>";
+	echo "<span class='help-block'>Not more than RM20000</span>";
+	echo "<input  class='form-control phone' id='income' min='0' max='20000' type='number' name='budget' value=".$budget." required/>";
+	echo "<br>";
+	echo "<div class='col-xs-10'>";
+	echo "<label for='department'>Department:</label>";
 			echo "<select class='form-control' id='sel1' name='department'>";
-			if($row['department'] == 'ai'){
+			if($department == 'ai'){
 				echo "<option value='ai' selected='selected'>Artificial Intelligence</option>";
 				echo "<option value='stk'>Computer System & Network</option>";
 				echo "<option value='se'>Software Engineering</option>";
@@ -234,7 +380,7 @@ input.final:active{
 				echo "<option value='under_grad'>All Undergraduate Students</option>";
 				echo "<option value='post_grad'>All Postgraduate Students</option>";
 				echo "<option value='all'>All Level Students</option>";
-			}elseif($row['department'] == 'se'){
+			}elseif($department == 'se'){
 				echo "<option value='ai'>Artificial Intelligence</option>";
 				echo "<option value='stk'>Computer System & Network</option>";
 				echo "<option value='se'  selected='selected'>Software Engineering</option>";
@@ -243,7 +389,7 @@ input.final:active{
 				echo "<option value='under_grad'>All Undergraduate Students</option>";
 				echo "<option value='post_grad'>All Postgraduate Students</option>";
 				echo "<option value='all'>All Level Students</option>";
-			}elseif($row['department'] == 'stk'){
+			}elseif($department == 'stk'){
 				echo "<option value='ai' >Artificial Intelligence</option>";
 				echo "<option value='stk' selected='selected'>Computer System & Network</option>";
 				echo "<option value='se'>Software Engineering</option>";
@@ -252,7 +398,7 @@ input.final:active{
 				echo "<option value='under_grad'>All Undergraduate Students</option>";
 				echo "<option value='post_grad'>All Postgraduate Students</option>";
 				echo "<option value='all'>All Level Students</option>";
-			}elseif($row['department'] == 'mis'){
+			}elseif($department == 'mis'){
 				echo "<option value='ai'>Artificial Intelligence</option>";
 				echo "<option value='stk'>Computer System & Network</option>";
 				echo "<option value='se'>Software Engineering</option>";
@@ -261,7 +407,7 @@ input.final:active{
 				echo "<option value='under_grad'>All Undergraduate Students</option>";
 				echo "<option value='post_grad'>All Postgraduate Students</option>";
 				echo "<option value='all'>All Level Students</option>";
-			}elseif($row['department'] == 'it'){
+			}elseif($department == 'it'){
 				echo "<option value='ai'>Artificial Intelligence</option>";
 				echo "<option value='stk'>Computer System & Network</option>";
 				echo "<option value='se'>Software Engineering</option>";
@@ -270,7 +416,7 @@ input.final:active{
 				echo "<option value='under_grad'>All Undergraduate Students</option>";
 				echo "<option value='post_grad'>All Postgraduate Students</option>";
 				echo "<option value='all'>All Level Students</option>";
-			}elseif($row['department'] == 'under_grad'){
+			}elseif($department == 'under_grad'){
 				echo "<option value='ai'>Artificial Intelligence</option>";
 				echo "<option value='stk'>Computer System & Network</option>";
 				echo "<option value='se'>Software Engineering</option>";
@@ -279,7 +425,7 @@ input.final:active{
 				echo "<option value='under_grad'  selected='selected'>All Undergraduate Students</option>";
 				echo "<option value='post_grad'>All Postgraduate Students</option>";
 				echo "<option value='all'>All Level Students</option>";
-			}elseif($row['department'] == 'post_grad'){
+			}elseif($department == 'post_grad'){
 				echo "<option value='ai'>Artificial Intelligence</option>";
 				echo "<option value='stk'>Computer System & Network</option>";
 				echo "<option value='se'>Software Engineering</option>";
@@ -299,19 +445,21 @@ input.final:active{
 				echo "<option value='all' selected='selected'>All Level Students</option>";
 			}
 			echo "</select>";
+			echo "</div>";
+			echo "<div class='col-xs-10'>";
 			echo "<label for='level'>Level:</label>";
-			echo "<select class='form-control' id='sel1' name='level'>";
-			if($row['level'] == 'department'){
+			echo "<select class='form-control ' id='sel1' name='level'>";
+			if($level == 'department'){
 				echo "<option value='department' selected='selected'>Department</option>";
 				echo "<option value='faculty'>Faculty</option>";
 				echo "<option value='university'>University</option>";
 				echo "<option value='state'>State</option>";
-			}elseif($row['level'] == 'faculty'){
+			}elseif($level == 'faculty'){
 				echo "<option value='department'>Department</option>";
 				echo "<option value='faculty' selected='selected'>Faculty</option>";
 				echo "<option value='university'>University</option>";
 				echo "<option value='state'>State</option>";
-			}elseif($row['level'] == 'university'){
+			}elseif($level == 'university'){
 				echo "<option value='department'>Department</option>";
 				echo "<option value='faculty'>Faculty</option>";
 				echo "<option value='university' selected='selected'>University</option>";
@@ -324,290 +472,233 @@ input.final:active{
 			}
 			
 			echo "</select>";
+			echo "</div>";
+			
+			echo "<div class='col-xs-10'>";
 			echo "<label for='type'>Type:</label>";
 			echo "<select class='form-control' id='sel1' name='type'>";
-			if($row['type'] == 'workshop'){
+			if($type == 'workshop'){
 				echo "<option value='workshop' selected='selected'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'talk'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'talk'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk' selected='selected'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'sports'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'sports'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports' selected='selected'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'orientation'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'orientation'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation' selected='selected'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'industrial_visit'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'industrial_visit'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit' selected='selected'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'academic_workshop'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'academic_workshop'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop' selected='selected'>Academic Workshop</option>";
+				echo "<option value='industrial_visit' selected='selected'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'exhibition'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'exhibition'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition' selected='selected'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'dinner'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'dinner'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner' selected='selected'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'conferrence'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'conferrence'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'Diner</option>";
 				echo "<option value='conferrence' selected='selected'>>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
-			}elseif($row['type'] == 'competition'){
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'competition'){
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition' selected='selected'>Competition</option>";
 				echo "<option value='seminar'>Seminar</option>";
+				echo "<option value='other'>Other</option>";
+			}elseif($type == 'seminar'){
+				echo "<option value='workshop'>Workshop</option>";
+				echo "<option value='talk'>Talk</option>";
+				echo "<option value='sports'>Sports</option>";
+				echo "<option value='orientation'>Orientation</option>";
+				echo "<option value='industrial_visit'>Industrial Visit</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
+				echo "<option value='exhibition'>Exhibition</option>";
+				echo "<option value='dinner'>Diner</option>";
+				echo "<option value='conferrence'>Conferrence</option>";
+				echo "<option value='competition'>Competition</option>";
+				echo "<option value='seminar' selected='selected'>Seminar</option>";
+				echo "<option value='other'>Other</option>";
 			}else{
 				echo "<option value='workshop'>Workshop</option>";
 				echo "<option value='talk'>Talk</option>";
 				echo "<option value='sports'>Sports</option>";
 				echo "<option value='orientation'>Orientation</option>";
 				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='academic_workshop'>Academic Workshop</option>";
+				echo "<option value='industrial_visit'>Academic Workshop</option>";
 				echo "<option value='exhibition'>Exhibition</option>";
 				echo "<option value='dinner'>Diner</option>";
 				echo "<option value='conferrence'>Conferrence</option>";
 				echo "<option value='competition'>Competition</option>";
-				echo "<option value='seminar' selected='selected'>Seminar</option>";
+				echo "<option value='seminar' >Seminar</option>";
+				echo "<option value='other' selected='selected'>Other</option>";
+				
 			}
 			echo "</select>";
-			echo "<label for='ename'>Expected Income:</label>";
-			echo "<input type='number' min='0' max='20000' class='form-control' id='income' name='income'  value=".$row['actualIncome']. " step='0.01'>";
+			echo "<br></br>";
+			
+			echo "</div>";
+			echo "<label for='ename'>Actual Income:</label>";
+			echo "<input type='number' min='0' max='20000' class='form-control phone' id='income' name='income'  value=".$income. " step='0.01'>";
+			echo "<br></br>";
 			echo "<label for='ename'>Comittee Size:</label>";
-			echo "<input type='number' min='0' max='100' class='form-control' id='cmtSize' name='cmtSize'  value=".$row['cmtSize'].">";
-			echo "<label for='ename'>Expected Participants:</label>";
-			echo "<input type='number' min='0' max='2000' class='form-control' id='ppt' name='ppt'  value=".$row['actualPtcpt'].">";
-			echo "<label for='ename'>Expected Feedback:</label>";
-			echo "<input type='number' min='0' max='100' class='form-control' id='feedback' name='feedback'  value=".$row['feedback']." step='0.01'>";
-		}
-	}else{
-		
-	}
-	}else{
-		echo "<label for='ename'>Event Name:</label>";
-			echo "<input type='text' class='form-control' id='event_name' name='name'>";
-			echo "<label for='date'>Event Date:</label>";
-			echo "<input type='text' class='form-control' id='datepicker' name='date'>";
-			echo "<label for='date1'>Propose Date:</label>";
-			echo "<input type='text' class='form-control' id='datepicker1' name='pdate'>";
-			echo "<label for='budget'>Budget:</label>";
-			echo "<input type='number' min='0' max='20000' class='form-control' id='budget' name='budget' step='0.01'>";
-			echo "<label for='department'>Depertment:</label>";
-			echo "<select class='form-control' id='sel1' name='department'>";
-			echo "<option value='ai'>Artificial Intelligence</option>";
-				echo "<option value='stk'>Computer System & Network</option>";
-				echo "<option value='se'>Software Engineering</option>";
-				echo "<option value='mis'>Management Information System</option>";
-				echo "<option value='it'>Information Technology</option>";
-				echo "<option value='under_grad'>All Undergraduate Students</option>";
-				echo "<option value='post_grad'>All Postgraduate Students</option>";
-				echo "<option value='all' selected='selected'>All Level Students</option>";
-		echo "</select>";
-			echo "<label for='level'>Level:</label>";
-			echo "<select class='form-control' id='sel1' name='level'>";
-			echo "<option value='department'>Department</option>";
-				echo "<option value='faculty'>Faculty</option>";
-				echo "<option value='university'>University</option>";
-				echo "<option value='state' selected='selected'>State</option>";
-			echo "</select>";
-			echo "<label for='type'>Type:</label>";
-			echo "<select class='form-control' id='sel1' name='type'>";
-			echo "<option value='workshop'>Workshop</option>";
-				echo "<option value='talk'>Talk</option>";
-				echo "<option value='sports'>Sports</option>";
-				echo "<option value='orientation'>Orientation</option>";
-				echo "<option value='industrial_visit'>Industrial Visit</option>";
-				echo "<option value='exhibition'>Exhibition</option>";
-				echo "<option value='dinner'>Diner</option>";
-				echo "<option value='conferrence'>Conferrence</option>";
-				echo "<option value='competition'>Competition</option>";
-				echo "<option value='seminar' selected='selected'>Seminar</option>";
-			echo "</select>";
-			echo "<label for='eincome'>Expected Income:</label>";
-			echo "<input type='number' min='0' max='20000' class='form-control' id='budget' name='income'  step='0.01'>";
-			echo "<label for='cmtSize'>Comittee Size:</label>";
-			echo "<input type='number' min='0' max='100' class='form-control' id='budget' name='cmtSize'  >";
-			echo "<label for='eppt'>Expected Participants:</label>";
-			echo "<input type='number' min='0' max='2000' class='form-control' id='budget' name='ppt' >";
-			echo "<label for='ename'>Expected Feedback:</label>";
-			echo "<input type='number' min='0' max='100' class='form-control' id='feedback' name='feedback' step='0.01'>";
-	}
-?>
-
-<h3>Section B:Proposal</h3>
-<?php
-	$id = $_GET["id"];
-	$id2 = $_GET["id2"];
-	$userid = 1;
-	$stfid = null;
-	$con = new mysqli("localhost", "root", "", "event");
-	if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-	}
-	$sql = "SELECT * FROM proposal WHERE caseID ='$id2'";//.strtolower($id);
-	$res=$con->query($sql);
-	if ($res->num_rows > 0) {
-		while( $row = mysqli_fetch_array($res)) {
-			echo "<label for='aim'>Aim:</label>";
-			echo "<textarea class='form-control' rows='5' id='aim' name='aim'>".$row['aim']."</textarea>";
-			echo "<label for='justification'>Justification:</label>";
-			echo "<textarea class='form-control' rows='5' id='justification' name='justification'>".$row['justification']."</textarea>";
-			echo "<label for='objective'>Objective:</label>";
-			echo "<textarea class='form-control' rows='5' id='objective' name='objective'>".$row['objective']."</textarea>";
-			echo "<label for='hasil_bengkel'>Required Equipment:</label>";
-			echo "<textarea class='form-control' rows='5' id='hasil_bengkel' name='hasil_bengkel'>".$row['hasil_bengkel']."</textarea>";
-			echo "<label for='schedule'>Schedule:</label>";
-			echo "<textarea class='form-control' rows='10' id='schedule' name='schedule'>".$row['schedule']."</textarea>";
-			echo "<label for='pby'>Prepared by:</label>";
-			echo "<textarea class='form-control' rows='10' id='pby' name='pby'>".$row['prepare_by']."</textarea>";
-			$con1 = new mysqli("localhost", "root", "", "profile");
-			if ($con1->connect_error) {
-    die("Connection failed: " . $con1->connect_error);
-	}
-	$sql1 = "SELECT staffid FROM user WHERE id =".$userid;
-	$res1=$con1->query($sql1);
-	if ($res1->num_rows > 0) {
-		while( $row1 = mysqli_fetch_array($res1)) {
-		$stfid = $row1['staffid'];
-	}
-	
-			echo "<input type='hidden' name='userid' value='".$userid."' />";
-	echo "<input type='hidden' name='userid2' value='".$stfid."' />";
-	}else{
-		echo "wrong";
-	}
-	}}else{
-		
-		
-		echo "<label for='aim'>Aim:</label>";
-			echo "<textarea class='form-control' rows='5' id='aim' name='aim'></textarea>";
-			echo "<label for='justification'>Justification:</label>";
-			echo "<textarea class='form-control' rows='5' id='justification' name='justification'></textarea>";
-			echo "<label for='objective'>Objective:</label>";
-			echo "<textarea class='form-control' rows='5' id='objective' name='objective'></textarea>";
-			echo "<label for='hasil_bengkel'>Required Equipment:</label>";
-			echo "<textarea class='form-control' rows='5' id='hasil_bengkel' name='hasil_bengkel'></textarea>";
-			echo "<label for='schedule'>Schedule:</label>";
-			echo "<textarea class='form-control' rows='10' id='schedule' name='schedule'></textarea>";
-			echo "<label for='pby'>Prepared by:</label>";
-			echo "<textarea class='form-control' rows='10' id='pby' name='pby'></textarea>";
-			$stfid = null;
-			$userid = 1;
-			$con1 = new mysqli("localhost", "root", "", "profile");
-			if ($con1->connect_error) {
-				die("Connection failed: " . $con1->connect_error);
-			}
-			$sql1 = "SELECT staffid FROM user WHERE id =".$userid;
-			$res1=$con1->query($sql1);
-			if ($res1->num_rows > 0) {
-				while( $row1 = mysqli_fetch_array($res1)) {
-				$stfid = $row1['staffid'];
-			}
-			}
+			echo "<input type='number' min='0' max='100' class='form-control phone' id='cmtSize' name='cSize'  value=".$cSize.">";
+			echo "<br></br>";
+			echo "<label for='ename'>Actual Participants:</label>";
+			echo "<input type='number' min='0' max='2000' class='form-control phone' id='ppt' name='aPpt'  value=".$aPpt.">";
+			echo "<br></br>";
+			echo "<label for='ename'>Actual Feedback:</label>";
+			echo "<input type='number' min='0' max='100' class='form-control phone' id='feedback' name='feedback'  value=".$feedback." step='0.01'>";
+			echo "<br></br>";
 			
+			echo "<div class ='form-group'>";
+			echo "<label for='ename'>Description:</label>";
+			echo "<textarea class='form-control phone' id='description' name='desc' rows='5' cols='2'>".$desc."</textarea>";
+			echo "</div>";
 			
-			echo "<input type='hidden' name='userid' value='".$userid."' />";
-	echo "<input type='hidden' name='userid2' value='".$stfid."' />";
-	}
-	
+			echo "<div class='col-xs-10'>";
+			echo "<label for='status'>Status:</label>";
+			echo "<select class='form-control ' id='sel1' name='status'>";
+			if($status == 'ONGOING'){
+				echo "<option value='ongoing' selected='selected'>ONGOING</option>";
+				echo "<option value='cancelled'>CANCELLED</option>";
+				echo "<option value='setback'>SETBACK</option>";
+				echo "<option value='success'>SUCCESS</option>";
+			}elseif($status == 'CANCELLED'){
+				echo "<option value='ongoing' >ONGOING</option>";
+				echo "<option value='cancelled' selected='selected'>CANCELLED</option>";
+				echo "<option value='setback'>SETBACK</option>";
+				echo "<option value='success'>SUCCESS</option>";
+			}elseif($status == 'SETBACK'){
+				echo "<option value='ongoing'>ONGOING</option>";
+				echo "<option value='cancelled'  selected='selected'>CANCELLED</option>";
+				echo "<option value='setback'>SETBACK</option>";
+				echo "<option value='success'>SUCCESS</option>";
+			}else{
+				echo "<option value='ongoing' selected='selected'>ONGOING</option>";
+				echo "<option value='cancelled'>CANCELLED</option>";
+				echo "<option value='setback'>SETBACK</option>";
+				echo "<option value='success'  selected='selected'>SUCCESS</option>";
+			}
+			echo "</select>";
+			echo "<br></br>";
+			
+			echo "</div>";
+			//echo "<input type='hidden' name='status' value=".$status.">";
+			echo "<input type='hidden' name='cid' value=".$cid.">";
+			echo "<input type='hidden' name='status2' value='1'>";
 	
 ?>
-<input type='submit' name='submit' value='Submit' class='btn btn-success btn-lg btn-block'>
-</form>
+	<br></br>
+    <input type="submit" name="submit" value="Submit" class="final">
+	</form>
 </div>
+</div>
+</body>
 <script>
   $( function() {
     $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-	$( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
   function empty() {
     var x;
@@ -618,5 +709,4 @@ input.final:active{
     };
 }
   </script>
-</body>
 </html>

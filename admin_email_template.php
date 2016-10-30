@@ -9,12 +9,44 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Document List</title>
+	<title>Event Mangement System: Pending Event Waiting for Approval</title>
+<script>
+		var people, asc1 = 1,
+            asc2 = 1,
+            asc3 = 1;
+        window.onload = function () {
+            people = document.getElementById("member");
+        }
 
+        function sort_table(tbody, col, asc) {
+            var rows = tbody.rows,
+                rlen = rows.length,
+                arr = new Array(),
+                i, j, cells, clen;
+            // fill the array with values from the table
+            for (i = 0; i < rlen; i++) {
+                cells = rows[i].cells;
+                clen = cells.length;
+                arr[i] = new Array();
+                for (j = 0; j < clen; j++) {
+                    arr[i][j] = cells[j].innerHTML;
+                }
+            }
+            // sort the array by the specified column number (col) and order (asc)
+            arr.sort(function (a, b) {
+                return (a[col] == b[col]) ? 0 : ((a[col] > b[col]) ? asc : -1 * asc);
+            });
+            // replace existing rows with new rows created from the sorted array
+            for (i = 0; i < rlen; i++) {
+                rows[i].innerHTML = "<td>" + arr[i].join("</td><td>") + "</td>";
+            }
+        }
+
+		
+</script>
 <style>
 body {
-    background-color:white;
-	overflow = auto;
+    background: white; /* fallback for old browsers */
 	width=100%;
 	margin: 0 auto;
 	
@@ -66,7 +98,16 @@ h1.topspace {
 	position: relative;
 	left:1px;
 }
-
+h3.black{
+	
+	color:black;
+}
+small{
+	color:#00A5F1;
+}
+small:active{
+	color:#006D9F;
+}
 h4.topspace{
 	font-size: 25px; 
 	letter-spacing: -1px; 
@@ -79,7 +120,10 @@ h4.topspace{
 	left:1px;
 	text-decoration: underline;
 }
-
+h3{
+	
+	color:white;
+}
 p{
 	font-family: Helvetica;
 	color: black;
@@ -94,7 +138,25 @@ a{
 	color: white;
 	text-decoration: none;
 }
+table {
+    border-collapse: collapse;
+	padding-bottom:50px;
+}
+  thead{
+	background-color:black;
+	color:white;
+}
+  
+  td{
+	  color:black;
+  }
+  tr{
+	  color:white;
+  }
 
+i.sort:hover{
+	color:#FF8663;
+}
 @media (max-width:767px) {
 .logo {
 	margin: 15px;
@@ -110,9 +172,6 @@ p{
 	position: relative;
 	top:120px;
 	
-}
-p.br{
-	opacity:0.0;
 }
 a {
     color:black;
@@ -151,14 +210,6 @@ ul.topnav li.right {float: right;}
     ul.topnav li {float: none;}
 }
 
-
-div.content{
-padding-left:60px;
-padding-bottom:5px;
-margin: 5px 0;
-width:auto;
-background-color:white;
-}
 </style>
 </head>
 <div id="header-wrapper">
@@ -167,7 +218,7 @@ background-color:white;
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Document List</h4>
+			<h4 class="topspace">Pending Event Waiting for Approval</h4>
 			</a>
 		</div>
 	</div>
@@ -185,33 +236,46 @@ background-color:white;
 </ul>
 </div>
 <br></br>
+<div class="table-responsive container">  
+<h3 class="black">Past Event Record</h3>        
+<table class="table table-condensed table-bordered">
+<thead>
+  <tr>
+    <th>Email Usage <i class="fa fa-sort sort" onclick="sort_table(people, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+    <th>Type <i  class="fa fa-sort sort" onclick="sort_table(people, 1, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+    <th>Template <i  class="fa fa-sort sort" onclick="sort_table(people, 2, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	</tr>
+</thead>
 
-<div class="content">
-<?php
-$dir = "template/";
-$ds = scandir($dir);
-$thelist = '';
-$dir = '';
-foreach ($ds as &$d) {
-    if ($d!='.' && $d!='..' )
-    {
-        echo ucwords($d).'<br>';
-		$dir = 'template/'.$d.'/';
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file);
-				$thelist .= '<li><a target="_blank" href="template/'.$d.'/'.$file.'" >'.ucwords($withoutExt).'</a></li>';
-			}
-			}
-		closedir($handle);
-		}
-	echo '<ul>'.$thelist.'</ul>';
-    }
-}
+  <tbody id="member">
+  <?php
+  $conn = new mysqli("localhost", "root", "", "profile");
+  if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+}		
+	$sql="SELECT * FROM def_tempt";
+	$res = $conn->query($sql);
+	if($res->num_rows > 0){
+	while( $row = mysqli_fetch_array($res)) {
+		echo "<tr>";
+		
+		echo "<td>".ucwords($row['name'])."</td>";
+		echo "<td>".ucwords($row['type'])."</td>";
+		
+		echo "<td>".$row['temp']."<a href='admin_email_tempt.php?id=".$row['temp_id']."'><small>Click Here</small></a></td>";
+		echo "</tr>";
+	}
+	}else{
+		echo "<tr>";
+		echo "<td>NO RESULT</td>";
+		
+		echo "</tr>";
+	}
+  ?>
+  </tbody>
+</table>
 
-?>
-</div>
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

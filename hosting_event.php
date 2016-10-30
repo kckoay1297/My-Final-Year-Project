@@ -263,6 +263,7 @@ width:auto;
   <li><a href="http://localhost/email_start.php">Email</a></li>
   <li><a href="http://localhost/doc_list.php">Documents</a></li>
   <li><a href="http://localhost/readme.docx">About</a></li>
+  <li><a href="http://localhost/event_search.php" target="_blank"><span class="glyphicon glyphicon-search"></span></a></li>
   <li class="right"><a href="#about">Logout</a></li>
 </ul>
 </div>
@@ -275,14 +276,16 @@ width:auto;
 	if ($con->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
-	$sql = "SELECT * FROM hosting_event WHERE userid=1";
+	$uid = 1;
+	echo "<a href='view_hosted_event.php?id=".$uid."'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-hourglass-o' style='font-size:36px'></i><br>Past Event</br></button></a>";	
+	$sql = "SELECT * FROM hosting_event WHERE userid=1 AND (act2 != 3 or act2 != -1)";
 	$res = $con->query($sql);
 	if ($res->num_rows > 0) {
 		while( $row = mysqli_fetch_array($res)) {
 		if($row['act1'] == 0 and $row['act2'] == 0){
-			echo "<a href='view_hosting_event.php?id=".$row['caseID']."&uid=1'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-hourglass-o' style='font-size:36px'></i><br>".$row['caseName']."</br></button></a>";
-		}elseif($row['act1'] == 1 and $row['act2'] == 0){
-			echo "<a href='view_hosting_event.php?id=".$row['caseID']."&uid=1'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-hourglass-half' style='font-size:36px'></i><br>".$row['caseName']."</br></button></a>";
+			echo "<a href='view_hosting_event.php?id=".$row['caseID']."&uid=1'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-hourglass-1' style='font-size:36px'></i><br>".$row['caseName']."</br></button></a>";
+		}elseif($row['act1'] == 1 and $row['act2'] == 1){
+			echo "<a href='view_hosting_event.php?id=".$row['caseID']."&uid=1'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-hourglass-2' style='font-size:36px'></i><br>".$row['caseName']."</br></button></a>";
 		
 		}else{
 			echo "<a href='view_hosting_event.php?id=".$row['caseID']."&uid=1'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-hourglass-end' style='font-size:36px'></i><br>".$row['caseName']."</br></button></a>";

@@ -9,7 +9,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Select People</title>
+	<title>Event Mangement System: Member</title>
 <script>
 		var people, asc1 = 1,
             asc2 = 1,
@@ -41,12 +41,14 @@
                 rows[i].innerHTML = "<td>" + arr[i].join("</td><td>") + "</td>";
             }
         }
+
 		
 </script>
 <style>
 body {
-    background: url("http://www.borongaja.com/data_images/out/25/663969-night-urban-landscape.jpg") ;
-	overflow = auto;
+    background: #000428; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #000428 , #004e92); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #000428 , #004e92); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */overflow = auto;
 	width=100%;
 	margin: 0 auto;
 	
@@ -111,7 +113,10 @@ h4.topspace{
 	left:1px;
 	text-decoration: underline;
 }
-
+h3{
+	
+	color:white;
+}
 p{
 	font-family: Helvetica;
 	color: black;
@@ -126,20 +131,19 @@ a{
 	color: white;
 	text-decoration: none;
 }
-
-thead{
-	background-color:#333;
+table {
+    border-collapse: collapse;
+	padding-bottom:50px;
+}
+  thead{
+	background-color:black;
 	color:white;
 }
-tbody{
-	background-color:white;
-}
-th:hover{
-	color:#FDFFD0;
-}
-td:hover{
-	background-color:#FDFFD0;
-}
+  
+  td{
+	  color:black;
+  }
+
 i.sort:hover{
 	color:#FF8663;
 }
@@ -195,15 +199,27 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
+td.success{
+	color:#006B9D;
+}
+td.ongoing{
+	color:#9D7700;
+}
+td.cancelled{
+	color:#9D2100;
+}
+td.setback{
+	color:#F20606;
+}
 </style>
 </head>
 <div id="header-wrapper">
 	<div id="header">
 		<div id="logo">
 			
-			<a class="header" href="hhttp://localhost/new_home.php">
+			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Email: Select People</h4>
+			<h4 class="topspace">Member</h4>
 			</a>
 		</div>
 	</div>
@@ -221,89 +237,77 @@ ul.topnav li.right {float: right;}
 </ul>
 </div>
 <br></br>
-<div class="table-responsive container">
-<form method="post" action="all_email_sent_b.php">          
+<div class="table-responsive container">  
+<h3>Past Event Record</h3>        
 <table class="table table-condensed table-striped table-bordered">
 <thead>
   <tr>
-    <th>Email To:</th>
-	<th>CC: </th>
-	<th>Name <i class="fa fa-sort sort" onclick="sort_table(people, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-    <th>Email <i  class="fa fa-sort sort" onclick="sort_table(people, 1, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-    <th>Department <i  class="fa fa-sort sort" onclick="sort_table(people, 2, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-	<th>Position <i class="fa fa-sort sort" onclick="sort_table(people, 3, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-	<th>Phone <i class="fa fa-sort sort" onclick="sort_table(people, 4, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
-	</tr>
+    <th>Date <i class="fa fa-sort sort" onclick="sort_table(people, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+    <th>Event ID <i  class="fa fa-sort sort" onclick="sort_table(people, 1, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+    <th>Name <i  class="fa fa-sort sort" onclick="sort_table(people, 2, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>Department <i class="fa fa-sort sort" onclick="sort_table(people, 3, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>Type <i class="fa fa-sort sort" onclick="sort_table(people, 4, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>Level <i class="fa fa-sort sort" onclick="sort_table(people, 5, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>Status <i class="fa fa-sort sort" onclick="sort_table(people, 6, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;"></i></th>
+	<th>View Profile </th>
+	  </tr>
 </thead>
 
   <tbody id="member">
-<?php
-  $conn = new mysqli("localhost", "root", "", "profile");
+  <?php
+  $conn = new mysqli("localhost", "root", "", "event");
   if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }		
-	$sql="SELECT * FROM user";
+	$sql="SELECT * FROM event_record ORDER BY caseDate";
 	$res = $conn->query($sql);
 	while( $row = mysqli_fetch_array($res)) {
-		echo "<tr>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='to_list[]' value='".$row['email']."'>Choose</label></td>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='cc_list[]' value='".$row['email']."'>Choose</label></td>";
-		echo "<td>".$row['firstname']." ".$row['lastname']."</td>";
-		echo "<td>".$row['email']."</td>";
-		echo "<td>".$row['department']."</td>";
-		echo "<td>".$row['designation']."</td>";
-		echo "<td>".$row['phone']."</td>";
+		$class = null;
+		if($row['status'] == "success"){
+			$class = "success";
+		}elseif($row['status'] == "ongoing"){
+			$class = "ongoing";
+		}elseif($row['status'] == "cancelled"){
+			$class = "cancelled";
+		}elseif($row['status'] == "setback"){
+			$class = "setback";
+		}else{
+			$class = "ongoing";
+		}
+		echo "<tr class='success'>";
+		echo "<td class='$class'>".$row['caseDate']."</td>";
+		echo "<td class='$class'>".strtoupper($row['caseID'])."</td>";
+		echo "<td class='$class'>".$row['caseName']."</td>";
+		if($row['department']=="ai"){
+			echo "<td class='$class'>Artificial Intelligence</td>";
+		}elseif($row['department']=="stk"){
+			echo "<td class='$class'>Networking & Computer System</td>";
+		}elseif($row['department']=="it"){
+			echo "<td class='$class'>Information Technology</td>";
+		}elseif($row['department']=="se"){
+			echo "<td class='$class'>Software Engineering</td>";
+		}elseif($row['department']=="mis"){
+			echo "<td class='$class'>Management Information System</td>";
+		}elseif($row['department']=="under_grad"){
+			echo "<td class='$class'>Undergraduate Student</td>";
+		}elseif($row['department']=="post_grad"){
+			echo "<td class='$class'>Postgraduate Student</td>";
+		}else{
+			echo "<td class='$class'>All Student</td>";
+		}
+		echo "<td class='$class'>".ucwords($row['type'])."</td>";
+		echo "<td class='$class'>".ucwords($row['level'])."</td>";
+		echo "<td class='$class'>".ucwords($row['status'])."</td>";
+		echo "<td class='$class'><a href='event_profile.php?id=".$row["cIndex"]."&id2=".$row['caseID']."' target='_blank'><i class='fa fa-external-link'></i> View </a>
+		<a href='edit_event_info.php?cid=".$row["caseID"]."' target='_blank'><i class='fa fa-edit'></i> Edit </a>
+		<a href='remove_event.php?id=".$row["caseID"]."' target='_blank'><i class='fa fa-ban'></i> Remove </a></td>";
 		echo "</tr>";
 	}
-	$sql1="SELECT * FROM student";
-	$res1 = $conn->query($sql1);
-	while( $row1 = mysqli_fetch_array($res1)) {
-		echo "<tr>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='to_list[]' value='".$row1['email']."'>Choose</label></td>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='cc_list[]' value='".$row1['email']."'>Choose</label></td>";
-		echo "<td>".$row1['firstname']." ".$row1['lastname']."</td>";
-		echo "<td>".$row1['email']."</td>";
-		echo "<td>".$row1['department']."</td>";
-		echo "<td>".$row1['level']."</td>";
-		echo "<td>".$row1['phone']."</td>";
-		echo "</tr>";
-	}
-	$sql2="SELECT * FROM outsider";
-	$res2 = $conn->query($sql2);
-	while( $row2 = mysqli_fetch_array($res2)) {
-		echo "<tr>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='to_list[]' value='".$row2['email']."'>Choose</label></td>";
-		echo "<td><label class='checkbox-inline'><input type='checkbox' name='cc_list[]' value='".$row2['email']."'>Choose</label></td>";
-		echo "<td>".$row2['firstname']." ".$row2['lastname']."</td>";
-		echo "<td>".$row2['email']."</td>";
-		echo "<td>".$row2['company']."</td>";
-		echo "<td>".$row2['position']."</td>";
-		echo "<td>".$row2['phone']."</td>";
-		echo "</tr>";
-	}
-	if(isset($_POST['submit'])){
-    $from = $_POST['from']; // this is your Email address
-    //$to = $_POST['to']; // this is the sender's Email address
-    $subject = "<b>".htmlspecialchars($_POST['subject'])."</b>";
-	$content = $_POST['message'];
-	$lt = htmlspecialchars($_POST['endtext']);
-	$message = $content. "<br>". $lt."</br>";
-	echo "<input type='hidden' name='from' value='".$from."' />";
-	echo "<input type='hidden' name='subject' value='".$subject."' />";
-	echo "<input type='hidden' name='message' value='".$message."' />";
-	}
-?>
+  ?>
   </tbody>
 </table>
 
-<input type='submit' name='submit' value='Submit' class='btn btn-success btn-md btn-block'>
- 
-</form>
-</table>
 
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php 
-
-?>

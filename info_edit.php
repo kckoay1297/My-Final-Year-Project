@@ -4,7 +4,7 @@
 	if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
-	$duty = $_POST['duty'];
+	$ph = $_POST['phone'];
 	$ic = $_POST['ic'];
 	
 	$editph = "UPDATE users SET phone=".$ph." WHERE id = 1";
