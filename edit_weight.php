@@ -180,7 +180,7 @@ input.radio{
 </div>
 <br></br>
 <div class="container">
-<form method="post" action="edit_case_finish.php">
+<form method="post" action="edit_weight_finish.php">
 <div class="form-group col-xs-5">
 <?php
 	$id = $_GET['id'];
@@ -189,99 +189,48 @@ input.radio{
     die("Connection failed: " . $conn1->connect_error);
 }
 	$name = $date = $budget = $department = $type = $level = $income = $cSize = $feedback = $aPpt = $desc = null;
-	$sql = "SELECT * FROM positivecase WHERE cIndex=".$id;
+	$sql = "SELECT * FROM weight WHERE windex=".$id;
 	$res = $conn1->query($sql);
 	if ($res->num_rows > 0) {
 		while($row1 = $res->fetch_assoc()) {
 			//$name = $row1['caseName'];
-			$date = $row1['caseDate'];
+			$date = $row1['date'];
 			$budget = $row1['budget'];
-			$department = $row1['department'];
+			//$department = $row1['department'];
 			$expenses = $row1['expenses'];
-			$type = $row1['type'];
+			//$type = $row1['type'];
 			$level = $row1['level'];
-			$income = $row1['actualIncome'];
-			$cSize = $row1['cmtSize'];
+			$income = $row1['income'];
+			$cSize = $row1['cSize'];
 			$feedback = $row1['feedback'];
-			$aPpt = $row1['actualPtcpt'];
+			$ppt = $row1['ppt'];
 			$desc = $row1['description'];
-			$name = $row1['caseName'];
+			
 			
 		}
 	}else {
 		echo "0 results";
 	}
-	echo "<label for='name'>Name:</label>";
-	echo "<input type='text' class='form-control' id='name' min='0' name='name' value='$name' required/>";
-	echo "<label for='budget'>Budget:</label>";
-	echo "<span class='help-block'>Not more than RM20000</span>";
-	echo "<input type='number' class='form-control' id='budget' min='0' max='20000' placeholder='200' name='budget' value=".$budget." required/>";
-	echo "<label for='expenses'>Expenses:</label>";
-	echo "<span class='help-block'>Not more than RM20000</span>";
-	echo "<input type='number' class='form-control' id='expenses' min='0' max='20000' placeholder='200' name='expenses' value=".$expenses." required/>";
 	echo "<label for='date'>Date:</label>";
-	echo "<input  class='form-control' id='datepicker' type='text' placeholder='2016-09-27' name='date' value='".$date."' required/>";
-	echo "<label for='sel1'>Level of Event (select one):</label>";
-      echo "<select class='form-control' id='sel1' name='level'>";
-	  $level1 = array("Department","Faculty","University","State");
-	  $lower = null;
-	  for($x = 0;$x < count($level1);$x++){
-		  if(strtolower($level1[$x]) == strtolower($level) ){
-			  $lower = strtolower($level1[$x]);
-			  echo "<option value='$lower' selected>".$level1[$x]."</option>";
-		  }else{
-			  $lower = strtolower($level1[$x]);
-			  echo "<option value='$lower'>".$level1[$x]."</option>";
-		  }
-	  }
-	  echo "</select>";
-      echo "<br>";
-	echo "<label for='sel1'>Department (select one):</label>";
-	echo "<select class='form-control' id='sel1' name='department'>";
-	$d1 = array("ai","stk","se","mis","it","under_grad","post_grad","all");
-	$d2 = array("Artificial Intelligence","Computer System & Networking","Software Engineering","Management Information System","Information Technology","Undergraduate Students","Postgraduate Students","All Students");
+	echo "<input  class='form-control' id='feedback' min='-0.01' max='100' type='number' step='0.01' name='date' value=".$date." required/>";
+	echo "<label for='date'>Budget:</label>";
+	echo "<input  class='form-control' id='budget' min='-0.01' max='100' type='number' step='0.01' name='budget' value=".$budget." required/>";
+	echo "<label for='date'>Expenses:</label>";
+	echo "<input  class='form-control' id='expenses' min='-0.01' max='100' type='number' step='0.01' name='expenses' value=".$expenses." required/>";
+	echo "<label for='date'>Level:</label>";
+	echo "<input  class='form-control' id='level' min='-0.01' max='100' type='number' step='0.01' name='level' value=".$level." required/>";
+	echo "<label for='date'>Income:</label>";
+	echo "<input  class='form-control' id='income' min='-0.01' max='100' type='number' step='0.01' name='income' value=".$income." required/>";
+	echo "<label for='date'>Cmt. Size:</label>";
+	echo "<input  class='form-control' id='cSize' min='-0.01' max='100' type='number' step='0.01' name='cSize' value=".$cSize." required/>";
+	echo "<label for='date'>Feedback:</label>";
+	echo "<input  class='form-control' id='feedback' min='-0.01' max='100' type='number' step='0.01' name='feedback' value=".$feedback." required/>";
+	echo "<label for='date'>Participants:</label>";
+	echo "<input  class='form-control' id='ppt' min='-0.01' max='100' type='number' step='0.01' name='ppt' value=".$ppt." required/>";
+	echo "<label for='date'>Description:</label>";
+	echo "<input  class='form-control' id='desc' min='-0.01' max='100' type='number' step='0.01' name='desc' value=".$desc." required/>";
+	echo "<input type='hidden' name='cid' value='$id'>";
 	
-	  for($x = 0;$x < count($d1);$x++){
-		  if(strtolower($d1[$x]) == strtolower($department) ){ 
-				$lower = strtolower($d1[$x]);
-			  echo "<option value='$lower ' selected>".$d2[$x]."</option>";
-		  }else{
-			  $lower = strtolower($d1[$x]);
-			  echo "<option value='$lower'>".$d2[$x]."</option>";
-		  }
-	  }
-	echo "</select>";
-	echo "<label for='sel1'>Types of Event (select one):</label>";
-	echo "<select class='form-control' id='sel1' name='type'>";
-	$t1 = array("workshop","talk","sports","orientation","industrial_visit","academic_workshop","exhibition","dinner","conferrence","competition","seminar","other");
-	  for($x = 0;$x < count($t1);$x++){
-		  if(strtolower($t1[$x]) == strtolower($type) ){ 
-			  $string = str_replace("_", ' ', $t1[$x]);
-			  $lower = strtolower($t1[$x]);
-			  echo "<option value=' $lower' selected>".ucwords($string)."</option>";
-		  }else{
-			  $string = str_replace("_", ' ', $t1[$x]);
-			  $lower = strtolower($t1[$x]);
-			  echo "<option value='$lower'>".ucwords($string)."</option>";
-		  }
-	  }
-	echo "</select>";
-	echo "<label for='income'>Income:</label>";
-	echo "<span class='help-block'>Not more than RM20000</span>";
-	echo "<input  class='form-control' id='income' min='0' max='20000' placeholder='500' type='number' name='income' value=".$income." required/>";
-	echo "<label for='size'>Committee Size:</label>";
-	echo "<span class='help-block'>Not more than 100</span>";
-	echo "<input  class='form-control' id='cSize' min='1' max='100' placeholder='20' type='number' name='cSize' value=".$cSize." required/>";
-	echo "<label for='size'>Degree of Satisfactory:</label>";
-	echo "<span class='help-block'>Not more than 100</span>";
-	echo "<input  class='form-control' id='feedback' min='1' max='100' placeholder='70.5' type='number' step='0.01' name='feedback' value=".$feedback." required/>";
-	echo "<label for='size'>Number of Participants:</label>";
-	echo "<span class='help-block'>Not more than 2500</span>";
-	echo "<input  class='form-control' id='ptp' min='1' max='2500' placeholder='20' type='number' name='ppt' value=".$aPpt." required/>";
-	echo "<label for='size'>Description:</label>";
-	echo "<span class='help-block'>At most 2 sentences</span>";
-	echo "<textarea class='form-control' rows='3' id='desc' name='desc'>".$desc."</textarea>";
-	echo "<input type='hidden' name='cid' value=".$id.">";
 
 ?>
 <br></br>

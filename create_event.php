@@ -574,6 +574,8 @@ input.final:active{
 			echo "<textarea class='form-control' rows='5' id='justification' name='justification'></textarea>";
 			echo "<label for='objective'>Objective:</label>";
 			echo "<textarea class='form-control' rows='5' id='objective' name='objective'></textarea>";
+			echo "<label for='objective'>Step of Implementation:</label>";
+			echo "<textarea class='form-control' rows='5' id='objective' name='implementation'></textarea>";
 			echo "<label for='hasil_bengkel'>Required Equipment:</label>";
 			echo "<textarea class='form-control' rows='5' id='hasil_bengkel' name='hasil_bengkel'></textarea>";
 			echo "<label for='schedule'>Schedule:</label>";

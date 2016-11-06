@@ -92,8 +92,8 @@ h4.topspace{
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 35px 25px;
-  width:400px ;
-  height:280px;
+  width:300px ;
+  height:250px;
   margin: 10px;
   float:left;
 }
@@ -265,9 +265,10 @@ ul.topnav li.right {float: right;}
 <br></br>
 
 <div class="content">
-<a href="http://localhost/positive_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_available</i><br>Positive</br></button></a>
-<a href="http://localhost/negative_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_busy</i><br>Negative</br></button></a>
-<a href="http://localhost/custom_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_note</i><br>Customized</br></button></a>
+<a href="http://localhost/positive_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_available</i><br>Similarly Events</br></button></a>
+<a href="http://localhost/negative_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_busy</i><br>Dissimilarly Events</br></button></a>
+<a href="http://localhost/custom_recom.php"><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event_note</i><br>Customized Search</br></button></a>
+<a href='create_event.php?app=0&id2=0&id=0'><button type="btn" class="btn btn-primary btn-lg sharp "><i class="material-icons" style="font-size:48px">event</i><br>Create New Events</br></button></a>
 </div>
 
 <div></div>

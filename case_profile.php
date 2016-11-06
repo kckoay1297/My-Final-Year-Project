@@ -438,6 +438,7 @@ button.myBtn2{
 		echo "<li>Budget: RM".number_format($row['budget'],2)."</li>";
 		echo "<li>Expected Income:RM".number_format($row['expectedIncome'],2)."</li>";
 		echo "<li>Actual Income: RM".number_format($row['actualIncome'],2)."</li>";
+		echo "<li>Expenses: RM".number_format($row['expenses'],2)."</li>";
 		if($row['expectedIncome'] < $row['actualIncome']){
 			echo "<li>Status: Profit</h4>";
 		}elseif($row['expectedIncome'] == 0 & $row['actualIncome'] == 0){
@@ -445,6 +446,7 @@ button.myBtn2{
 		}else{
 			echo "<li>Status: Loss</li>";
 		}
+		
 		//echo "<li>Event Status: ".ucwords($row['status'])."</li>";
 		}
 	}else{

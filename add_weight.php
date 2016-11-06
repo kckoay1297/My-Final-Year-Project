@@ -9,7 +9,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Document List</title>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<title>Event Mangement System: Positive Case Recommendation</title>
 
 <style>
 body {
@@ -94,7 +98,13 @@ a{
 	color: white;
 	text-decoration: none;
 }
-
+label{
+	color:black;
+	font-size:24px;
+}
+textarea{
+	font-size:16px;
+}
 @media (max-width:767px) {
 .logo {
 	margin: 15px;
@@ -110,16 +120,6 @@ p{
 	position: relative;
 	top:120px;
 	
-}
-p.br{
-	opacity:0.0;
-}
-a {
-    color:black;
-}
-a.header{
-	color: white;
-	text-decoration: none;
 }
 
 ul.topnav {
@@ -150,16 +150,8 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
-
-li{
-	list-style-type:none;
-}
-div.content{
-padding-left:60px;
-padding-bottom:5px;
-margin: 5px 0;
-width:auto;
-background-color:white;
+input.radio{
+	font-size:16px;
 }
 </style>
 </head>
@@ -169,7 +161,7 @@ background-color:white;
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Document List</h4>
+			<h4 class="topspace">Postive Case Recommendation</h4>
 			</a>
 		</div>
 	</div>
@@ -187,55 +179,57 @@ background-color:white;
 </ul>
 </div>
 <br></br>
-
-<div class="content">
-<h3>Download</h3>
+<div class="container">
+<form method="post" action="add_weight_finish.php">
+<div class="form-group col-xs-5">
 <?php
-/*
-$dir = "template/";
-$ds = scandir($dir);
-$thelist = '';
-$dir = '';
-foreach ($ds as &$d) {
-    if ($d!='.' && $d!='..' )
-    {
-        echo ucwords($d).'<br>';
-		$dir = 'template/'.$d.'/';
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file);
-				$thelist .= '<li><a target="_blank" href="template/'.$d.'/'.$file.'" >'.ucwords($withoutExt).'</a></li>';
-			}
-			}
-		closedir($handle);
-		}
-	echo '<ul>'.$thelist.'</ul>';
-    }
-	}
-	*/
-  $directory = 'template/';
-
-$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
-
-while($it->valid()) {
-
-    if (!$it->isDot()) {
-		$link = $it->key();
-		$name = $it->getSubPath();
-        //echo 'SubPathName: ' . $it->getSubPathName() . " 1<br>";
-        //echo 'SubPath:     ' . $it->getSubPath() . " 2<br>";
-        //echo 'Key:         ' . $it->key() . " 3<br>";
-		$filename = pathinfo($link, PATHINFO_FILENAME);
-		echo "<li>".ucwords($name).": <a target='_blank' href='$link'>".ucwords($filename)."<a></li>";
-    }
-
-    $it->next();
-}
-
+	echo "<label for='type'>Type:</label>";
+	echo "<input  class='form-control' id='type' type='text' name='type'  required/>";
+	
+	echo "<label for='date'>Date:</label>";
+	echo "<input  class='form-control' id='date' min='-0.01' max='100' type='number' step='0.01' name='date'  required/>";
+	echo "<label for='date'>Budget:</label>";
+	echo "<input  class='form-control' id='budget' min='-0.01' max='100' type='number' step='0.01' name='budget'  required/>";
+	echo "<label for='date'>Expenses:</label>";
+	echo "<input  class='form-control' id='expenses' min='-0.01' max='100' type='number' step='0.01' name='expenses'  required/>";
+	echo "<label for='date'>Level:</label>";
+	echo "<input  class='form-control' id='level' min='-0.01' max='100' type='number' step='0.01' name='level' required/>";
+	echo "<label for='date'>Income:</label>";
+	echo "<input  class='form-control' id='income' min='-0.01' max='100' type='number' step='0.01' name='income'  required/>";
+	echo "<label for='date'>Cmt. Size:</label>";
+	echo "<input  class='form-control' id='cSize' min='-0.01' max='100' type='number' step='0.01' name='cSize'  required/>";
+	echo "<label for='date'>Feedback:</label>";
+	echo "<input  class='form-control' id='feedback' min='-0.01' max='100' type='number' step='0.01' name='feedback'  required/>";
+	echo "<label for='date'>Participants:</label>";
+	echo "<input  class='form-control' id='ppt' min='-0.01' max='100' type='number' step='0.01' name='ppt'  required/>";
+	echo "<label for='date'>Description:</label>";
+	echo "<input  class='form-control' id='desc' min='-0.01' max='100' type='number' step='0.01' name='desc'  required/>";
+	//echo "<input type='hidden' name='cid' value='$id'>";
+	
 
 ?>
+<br></br>
+<button type = "submit" name = "submit" value = "submit" class="btn btn-success btn-md btn-block" onClick="return empty()">Submit</button>
+
 </div>
+
+</form>
+</div>
+
+
 <script src="js/bootstrap.min.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  function empty() {
+    var x;
+    x = document.getElementById("val").value;
+    if (x == "") {
+        alert("Enter a Variable");
+        return false;
+    };
+}
+  </script>
 </body>
 </html>

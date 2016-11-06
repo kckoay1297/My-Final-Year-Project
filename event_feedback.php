@@ -9,11 +9,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Document List</title>
+	<title>Event Mangement System: View Hosting Event</title>
 
 <style>
 body {
-    background-color:white;
+    background: url("http://www.borongaja.com/data_images/out/25/663969-night-urban-landscape.jpg") ;
 	overflow = auto;
 	width=100%;
 	margin: 0 auto;
@@ -150,16 +150,97 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
-
-li{
-	list-style-type:none;
+.btn {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 35px 25px;
+  width:360px ;
+  height:180px;
+  margin: 5px;
+  float:left;
 }
+
+.btn-lg {
+  font-size: 16px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #8716FF;
+  border-color: #8716FF;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #001ABD;
+  border-color: #001ABD;
+  opacity: 1.0;
+}
+
+/***********************
+  SHARP BUTTONS
+************************/
+.sharp {
+  border-radius:0;
+}
+
+/***********************
+  CUSTON BTN VALUES
+************************/
+
+.btn {
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+	opacity: 0.8;
+    /*position:absolute;*/
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+	background: #0027B6;
+    color: #ffffff;
+	opacity: 1.0;
+}
+
+.btn-primary {
+    background: #0046A5;
+    color: #ffffff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #01019C;
+	//8000BB
+	opacity: 1.0;
+	box-shadow: 2px 2px 8px #000000;
+}
+.btn-primary:active, .btn-primary.active {
+    background: #6199E4;
+    box-shadow: none;
+	opacity: 1.0;
+}
+
 div.content{
 padding-left:60px;
 padding-bottom:5px;
 margin: 5px 0;
+height:480px;
 width:auto;
-background-color:white;
 }
 </style>
 </head>
@@ -169,7 +250,7 @@ background-color:white;
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Document List</h4>
+			<h4 class="topspace">View Hosting Event</h4>
 			</a>
 		</div>
 	</div>
@@ -189,53 +270,20 @@ background-color:white;
 <br></br>
 
 <div class="content">
-<h3>Download</h3>
 <?php
-/*
-$dir = "template/";
-$ds = scandir($dir);
-$thelist = '';
-$dir = '';
-foreach ($ds as &$d) {
-    if ($d!='.' && $d!='..' )
-    {
-        echo ucwords($d).'<br>';
-		$dir = 'template/'.$d.'/';
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file);
-				$thelist .= '<li><a target="_blank" href="template/'.$d.'/'.$file.'" >'.ucwords($withoutExt).'</a></li>';
-			}
-			}
-		closedir($handle);
-		}
-	echo '<ul>'.$thelist.'</ul>';
-    }
-	}
-	*/
-  $directory = 'template/';
-
-$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
-
-while($it->valid()) {
-
-    if (!$it->isDot()) {
-		$link = $it->key();
-		$name = $it->getSubPath();
-        //echo 'SubPathName: ' . $it->getSubPathName() . " 1<br>";
-        //echo 'SubPath:     ' . $it->getSubPath() . " 2<br>";
-        //echo 'Key:         ' . $it->key() . " 3<br>";
-		$filename = pathinfo($link, PATHINFO_FILENAME);
-		echo "<li>".ucwords($name).": <a target='_blank' href='$link'>".ucwords($filename)."<a></li>";
-    }
-
-    $it->next();
+	$uid = $_GET['id'];
+	$con = new mysqli("localhost", "root", "", "event");
+	// Check connection
+	if ($con->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
 }
-
-
+	$uid = 1;
+	echo "<a href='pending_feedback.php?id=".$uid."&eid=0&act=0'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-comment-o' style='font-size:36px'></i><br>Pending Feedback</br></button></a>";	
+	echo "<a href='user_feedbacklist.php?id=".$uid."'><button type='btn' class='btn btn-primary btn-lg sharp'><i class='fa fa-comment' style='font-size:36px'></i><br>Feedback Completed</br></button></a>";	
+	
 ?>
 </div>
+<p class="br">Prototype</p><br></br><br></br>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

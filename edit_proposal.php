@@ -491,6 +491,8 @@ input.final:active{
 			echo "<textarea class='form-control' rows='5' id='justification' name='justification'>".$row['justification']."</textarea>";
 			echo "<label for='objective'>Objective:</label>";
 			echo "<textarea class='form-control' rows='5' id='objective' name='objective'>".$row['objective']."</textarea>";
+			echo "<label for='objective'>Implementation:</label>";
+			echo "<textarea class='form-control' rows='5' id='implementation' name='implementation'>".$row['implementation']."</textarea>";
 			echo "<label for='hasil_bengkel'>Required Equipment:</label>";
 			echo "<textarea class='form-control' rows='5' id='hasil_bengkel' name='hasil_bengkel'>".$row['hasil_bengkel']."</textarea>";
 			echo "<label for='schedule'>Schedule:</label>";

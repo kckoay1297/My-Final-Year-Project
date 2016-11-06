@@ -319,7 +319,7 @@ ul.topnav li.right {float: right;}
 <div class="content">
 <a href="http://localhost/casebaselist.php"><button type="btn" class="btn btn-primary btn-lg sharp ">Casebase List</button></a>
 <a href="http://localhost/casebase_adaption.php"><button type="btn" class="btn btn-primary btn-lg sharp ">Casebase Adaption</button></a>
-<a href="http://localhost/casebase_other.php"><button type="btn" class="btn btn-primary btn-lg sharp " disabled>Other</button></a>
+<a href="http://localhost/casebase_weight.php"><button type="btn" class="btn btn-primary btn-lg sharp ">Casebase Weight Manage</button></a>
 
 
 

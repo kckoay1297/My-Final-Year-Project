@@ -26,10 +26,11 @@ if(isset($_POST['submit'])){
  $hasil_bengkel = $_POST['hasil_bengkel'];
  $schedule = $_POST['schedule'];
  $prepare_by = $_POST['pby'];
+ $imp = $_POST['implementation'];
  $userid=$_POST['userid'];
  $userid2=$_POST['userid2'];
-$sql = "INSERT INTO pending_event (user_id, user_id2,caseDate,propose_date, caseName, budget,department,level,type,expectedIncome,cmtSize,expectedPtcpt,expectedFeedback,aim,justification,objective,hasil_bengkel,schedule,prepare_by)
-VALUES ('$userid','$userid2','$date','$pdate','$name','$budget','$department','$level','$type','$income','$cmtSize','$ppt','$feedback', '$aim','$justification','$objective','$hasil_bengkel','$schedule','$prepare_by')";
+$sql = "INSERT INTO pending_event (user_id, user_id2,caseDate,propose_date, caseName, budget,department,level,type,expectedIncome,cmtSize,expectedPtcpt,expectedFeedback,aim,justification,objective, implementation, hasil_bengkel,schedule,prepare_by)
+VALUES ('$userid','$userid2','$date','$pdate','$name','$budget','$department','$level','$type','$income','$cmtSize','$ppt','$feedback', '$aim','$justification','$objective','$imp','$hasil_bengkel','$schedule','$prepare_by')";
 
 
  if(mysqli_query($con,$sql)){

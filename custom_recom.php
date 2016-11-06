@@ -9,7 +9,11 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<title>Event Mangement System: Document List</title>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<title>Event Mangement System: Positive Case Recommendation</title>
 
 <style>
 body {
@@ -94,7 +98,13 @@ a{
 	color: white;
 	text-decoration: none;
 }
-
+label{
+	color:black;
+	font-size:24px;
+}
+textarea{
+	font-size:16px;
+}
 @media (max-width:767px) {
 .logo {
 	margin: 15px;
@@ -110,16 +120,6 @@ p{
 	position: relative;
 	top:120px;
 	
-}
-p.br{
-	opacity:0.0;
-}
-a {
-    color:black;
-}
-a.header{
-	color: white;
-	text-decoration: none;
 }
 
 ul.topnav {
@@ -150,16 +150,8 @@ ul.topnav li.right {float: right;}
     ul.topnav li.right, 
     ul.topnav li {float: none;}
 }
-
-li{
-	list-style-type:none;
-}
-div.content{
-padding-left:60px;
-padding-bottom:5px;
-margin: 5px 0;
-width:auto;
-background-color:white;
+input.radio{
+	font-size:16px;
 }
 </style>
 </head>
@@ -169,7 +161,7 @@ background-color:white;
 			
 			<a class="header" href="http://localhost/new_home.php">
 			<h1 class="topspace">Event Management System</h1>
-			<h4 class="topspace">Document List</h4>
+			<h4 class="topspace">Postive Case Recommendation</h4>
 			</a>
 		</div>
 	</div>
@@ -187,55 +179,60 @@ background-color:white;
 </ul>
 </div>
 <br></br>
-
-<div class="content">
-<h3>Download</h3>
-<?php
-/*
-$dir = "template/";
-$ds = scandir($dir);
-$thelist = '';
-$dir = '';
-foreach ($ds as &$d) {
-    if ($d!='.' && $d!='..' )
-    {
-        echo ucwords($d).'<br>';
-		$dir = 'template/'.$d.'/';
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				$withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file);
-				$thelist .= '<li><a target="_blank" href="template/'.$d.'/'.$file.'" >'.ucwords($withoutExt).'</a></li>';
-			}
-			}
-		closedir($handle);
-		}
-	echo '<ul>'.$thelist.'</ul>';
-    }
-	}
-	*/
-  $directory = 'template/';
-
-$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
-
-while($it->valid()) {
-
-    if (!$it->isDot()) {
-		$link = $it->key();
-		$name = $it->getSubPath();
-        //echo 'SubPathName: ' . $it->getSubPathName() . " 1<br>";
-        //echo 'SubPath:     ' . $it->getSubPath() . " 2<br>";
-        //echo 'Key:         ' . $it->key() . " 3<br>";
-		$filename = pathinfo($link, PATHINFO_FILENAME);
-		echo "<li>".ucwords($name).": <a target='_blank' href='$link'>".ucwords($filename)."<a></li>";
-    }
-
-    $it->next();
-}
-
-
-?>
+<div class="container">
+<form method="post" action="custom_recom_next.php">
+<div class="form-group col-xs-5">
+<label for="budget">Choice of Attribute:</label>
+  <div class="checkbox">
+      <label><input type="checkbox" value="date" name="choice[]" >Date</label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="budget" name="choice[]" >Budget</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="expenses" name="choice[]" >Expenses</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="income" name="choice[]" >Income</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="level" name="choice[]" >Level</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="cSize" name="choice[]" >Comittee Size</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="actPtcpt" name="choice[]" >No. of Participants</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="feedback" name="choice[]" >Feedback (in %)</label>
+    </div>
+	<div class="checkbox">
+      <label><input type="checkbox" value="description" name="choice[]" >Descriptionss</label>
+    </div>
+    
+ <input type="submit" value="Submit" id="checkBtn" class="btn btn-success btn-md btn-block" name="submit" id="checkBtn">
+<a href='create_event.php?app=0&id=0&id2=0' class='myBtn btn btn-primary btn-md btn-block' role='button'>Create New Event</a>
 </div>
+
+</form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#checkBtn').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+
+</script>
 <script src="js/bootstrap.min.js"></script>
+  
 </body>
 </html>

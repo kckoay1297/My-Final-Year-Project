@@ -4,26 +4,28 @@ $con = mysqli_connect("localhost","root","","casebase");
 if (mysqli_connect_errno()){
 	echo "Failed to connect to MySQL:" . mysqli_connect_error();
 }
-if(isset($_POST['submit'])){  
- $name = $_POST['name'];
+if(isset($_POST['submit'])){
+ //$id = $_POST['id'];	
+// $name = $_POST['name'];
+$type = $_POST['type'];
  $date = $_POST['date'];
- $expenses = $_POST['expenses'];
  $budget = $_POST['budget'];
- $department = $_POST['department'];
+ $expenses = $_POST['expenses'];
+ //$department = $_POST['department'];
  $level = $_POST['level']; 
- $type = $_POST['type'];
+// $type = $_POST['type'];
  $income = $_POST['income'];
  $cmtSize = $_POST['cSize'];
  $ppt = $_POST['ppt'];
  $feedback = $_POST['feedback'];
  $desc = $_POST['desc'];
- $id= $_POST['cid'];
-$sql = "UPDATE positivecase SET caseName='$name', caseDate='$date', budget=".$budget.", expenses=".$expenses.",department='$department', level = '$level', type='$type',actualIncome=".$income.",
-cmtSize=".$cmtSize.", actualPtcpt=".$ppt.", feedback=".$feedback.", description='$desc' WHERE cIndex=".$id;
+ 
+$sql = "INSERT INTO weight (type,date,budget,expenses,level, income,cSize,feedback,ppt,description) VALUES 
+('$type','$date','$budget','$expenses','$level', '$income','$cmtSize','$feedback','$ppt','$desc')";
 
  if(mysqli_query($con,$sql)){
 	 echo '<script language="javascript">';
-	 echo 'alert("Case Info Updated.")';
+	 echo 'alert("Case Updated.")';
 	 echo '</script>';
 	 echo "<script>setTimeout(\"location.href = 'http://localhost/admin_panel.php';\",1500);</script>";
  }else{

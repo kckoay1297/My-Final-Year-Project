@@ -346,6 +346,7 @@ form{
 		while($row1 = $res->fetch_assoc()) {
 			$date = $row1['caseDate'];
 			$budget = $row1['budget'];
+			$expenses = $row1['expenses'];
 			$department = $row1['department'];
 			$type = $row1['type'];
 			$level = $row1['level'];
@@ -364,9 +365,13 @@ form{
 	echo "<label for='date'>Date:</label>";
 	echo "<input  class='form-control phone' id='datepicker' type='text' value='$date' name='date' required>";
 	echo "<br>";
-	echo "<label for='income'>Income:</label>";
+	echo "<label for='income'>Budget:</label>";
 	echo "<span class='help-block'>Not more than RM20000</span>";
 	echo "<input  class='form-control phone' id='income' min='0' max='20000' type='number' name='budget' value=".$budget." required/>";
+	echo "<br>";
+	echo "<label for='expenses'>Expenses:</label>";
+	echo "<span class='help-block'>Not more than RM20000</span>";
+	echo "<input  class='form-control phone' id='expenses' min='0' max='20000' type='number' name='expenses' value=".$expenses." required/>";
 	echo "<br>";
 	echo "<div class='col-xs-10'>";
 	echo "<label for='department'>Department:</label>";
